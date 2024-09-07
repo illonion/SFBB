@@ -2,6 +2,7 @@
     --mainBlack: #1E1E1E;
     --mainRed: #DD3C4C;
     --borderRed: #80102B;
+    --borderBlue: #2A3CA6;
 }
 
 #main {
@@ -28,6 +29,7 @@
     color: var(--mainBlack);
 }
 #trianglePaperTop {
+    position: relative; top: 8px;
     margin-left: -8px;
     width: 304px; height: 9px;
 }
@@ -133,6 +135,8 @@
 /* Gameplay Section */
 #gameplayRed1Section { position: absolute; left: 350px; top: 45px;}
 #gameplayRed2Section { position: absolute; left: 970px; top: 45px;}
+#gameplayBlue1Section { position: absolute; left: 350px; top: 556px; }
+#gameplayBlue2Section { position: absolute; left: 970px; top: 556px; }
 /* Gameplay Screen */
 .gameplayScreen {
     width: 600px; height: 450px;
@@ -147,16 +151,16 @@
     transform: translateX(-50%);
     width: 209px;
 }
-.gameplayRed1LivesContainer {
+.gameplayLivesContainerSection {
     position: absolute; 
-    border: 7px solid var(--borderRed);
+    border: 7px solid;
     border-radius: 15px;
     width: 209px; height: 57px;
 }
 .gameplayLivesContainerFront {
     top: 0;
     z-index: 1;
-    border: 7px solid var(--borderRed);
+    border: 7px solid;
     background-color: #FFF6E8;
     display: flex;
     align-items: center;
@@ -165,6 +169,12 @@
 .gameplayLivesContainerBack {
     top: 7px;
     z-index: 0;
-    background-color: var(--borderRed);
 }
+.gameplayLivesContainerBorderRed { border-color: var(--borderRed); }
+.gameplayLivesContainerBorderBlue { border-color: var(--borderBlue); }
 .gameplayLivesContainerFront > * { margin: 0 6px; }
+
+/* Mappool Menu */
+#mappoolMenu {
+    position: absolute; right: 0; bottom: 0;
+}
