@@ -5,6 +5,7 @@
     --mainTextDarkRed: #4A1C29;
     --mainDarkRed: #80102B;
     --mainDarkBlue: #2A3CA6;
+    --mainTextMappoolColour: #300E00;
 }
 
 #main {
@@ -82,3 +83,36 @@
     margin-right: 31px;
 }
 .slotLivesIndividualContainer > * { margin-right: 5px; }
+
+/* Menu Background */
+#menuBackground {
+    position: absolute; left: 600px; top: 20px;
+    width: 1160px; height: 1060px;
+}
+
+/* No Mod Section */
+#noModSection {
+    position: absolute; left: 770px; top: 226px;
+    width: 241px;
+}
+#noModText {
+    color: var(--mainDarkBlue);
+    font-family: "Pacifico";
+    font-weight: 400;
+    font-size: 2rem;
+}
+.mapInformation {
+    margin-top: -5px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Patrick Hand";
+    font-weight: 400;   
+    color: var(--mainTextMappoolColour);
+}
+.mapTextSongName, .mapStarInformation {
+    line-height: 22px;
+    font-size: 1.25rem;
+}
+.mapTextDifficultyName, .mapTextAristName { font-size: 0.9375rem; }
+.mapTextAristName { line-height: 1.25rem; }
