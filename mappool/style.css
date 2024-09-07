@@ -1,5 +1,53 @@
+:root {
+    --mainTextDarkRed: #4A1C29;
+    --mainDarkRed: #80102B;
+}
+
 #main {
     position: absolute; left: 0; top: 0;
     width: 1920px; height: 1080px;
     background-image: url("static/background.png");
+}
+
+/* Red Team Information */
+#redTeamBackground {
+    position: absolute; left: 60px; top: 60px;
+    width: 495.65px; height: 317.65px;
+}
+#redTeamInformation {
+    position: absolute; left: 60px; top: 60px;
+}
+#redTeamName {
+    position: absolute; left: 54px; top: 40px;
+    white-space: nowrap;
+    color: var(--mainDarkRed);
+    font-family: "Pacifico";
+    font-weight: 400;
+    font-size: 2rem;
+}
+#redTeamPlayers {
+    position: absolute; left: 52px; top: 98px;
+    width: 416px; height: 94px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.redTeamPlayer {
+    width: 208px;
+    height: 50px;
+    display: flex;
+}
+.redTeamPlayerProfile {
+    border: 2px solid var(--mainDarkRed);
+    width: 40px; height: 40px;
+    border-radius: 7px;
+    background-size: cover;
+    background-image: url("https://a.ppy.sh/8306102")
+}
+.redTeamPlayerName {
+    margin-left: 8px;
+    font-family: "Patrick Hand", cursive;
+    font-weight: 400;
+    line-height: 42px;
+    color: var(--mainTextDarkRed);
+    font-size: 20px;
 }
