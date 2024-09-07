@@ -96,12 +96,14 @@
     display: flex;
     flex-direction: column;
 }
+#mappoolSectionColumn2 {
+    position: absolute; left: 1065px; top: 226px;
+    display: flex;
+    flex-direction: column;
+}
 
 /* Mod Section */
 .modSection { width: 241px; }
-#hiddenSection {
-    margin-top: -5px;
-}
 /* Mod Text */
 .modText {
     font-family: "Pacifico";
@@ -110,10 +112,12 @@
 }
 #noModText { color: var(--mainDarkBlue); }
 #hiddenText { color: #D3925E; }
+#hardRockText { color: var(--mainDarkRed); }
+#doubleTimeText { color: #662AA6; }
 /* Map Information */
 .mapInformation {
     margin-top: -5px;
-    margin-bottom: 14px;
+    margin-bottom: 17px;
     display: flex;
     justify-content: space-between;
     font-family: "Patrick Hand";
@@ -125,4 +129,4 @@
     font-size: 1.25rem;
 }
 .mapTextDifficultyName, .mapTextAristName { font-size: 0.9375rem; }
-.mapTextAristName { line-height: 1.25rem; }
+.mapTextAristName { line-height: 1rem; }
