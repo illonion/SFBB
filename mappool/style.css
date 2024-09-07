@@ -90,17 +90,27 @@
     width: 1160px; height: 1060px;
 }
 
-/* No Mod Section */
-#noModSection {
+/* Columns */
+#mappoolSectionColumn1 {
     position: absolute; left: 770px; top: 226px;
-    width: 241px;
+    display: flex;
+    flex-direction: column;
 }
-#noModText {
-    color: var(--mainDarkBlue);
+
+/* Mod Section */
+.modSection { width: 241px; }
+#hiddenSection {
+    margin-top: -5px;
+}
+/* Mod Text */
+.modText {
     font-family: "Pacifico";
     font-weight: 400;
     font-size: 2rem;
 }
+#noModText { color: var(--mainDarkBlue); }
+#hiddenText { color: #D3925E; }
+/* Map Information */
 .mapInformation {
     margin-top: -5px;
     margin-bottom: 14px;
