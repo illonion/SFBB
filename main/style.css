@@ -1,6 +1,130 @@
+:root {
+    --mainBlack: #1E1E1E;
+    --mainRed: #DD3C4C;
+}
+
 #main {
     position: absolute; left: 0; top: 0;
     width: 1920px; height: 1080px;
     background-image: url("static/background.png");
     background-size: cover;
+    overflow: hidden;
+}
+
+/* Helper Classes */
+.mainRedColour { color: var(--mainRed); }
+.splineSansMonoRegularFontSize15LineSize20 {
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 0.9375rem;
+    line-height: 20px;
+}
+
+/* Now Playing Section */
+#nowPlayingSection {
+    position: absolute; left: 31px; top: 433px;
+    width: 287.81px;
+    color: var(--mainBlack);
+}
+#trianglePaperTop {
+    margin-left: -8px;
+    width: 304px; height: 9px;
+}
+#trianglePaperBottom {
+    position: relative; top: -8px;
+    margin-left: -8px;
+    width: 304px; height: 9px;
+    rotate: -180deg;
+}
+/* Paper receipt section */
+/* Width is calculated with a width of 40px for paperReceiptSectionSongNameDifficulty */
+#paperReceiptSection {
+    position: relative;
+    background-color: white;
+    width: inherit; height: 483px;
+}
+/* Paper Receipt Lines */
+#paperReceiptFullLineTop {
+    position: absolute; left: 50%; top: 10px;
+    transform: translateX(-50%);
+    width: 260px;
+}
+#paperReceiptFullLineBottom {
+    position: absolute; left: 50%; top: 53px;
+    transform: translateX(-50%);
+    width: 260px;
+}
+#paperReceiptHalfLineLeft {
+    position: absolute; left: 14px; top: 107px;
+    width: 85px;
+}
+#paperReceiptHalfLineRight {
+    position: absolute; right: 14px; top: 107px;
+    width: 85px;
+}
+/* Paper Receipt Section Pick Texts */
+.paperReceiptSectionPickTexts {
+    position: absolute; top: 18px;
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+#paperReceiptSectionPickText {
+    left: 23px;
+}
+#paperReceiptSectionPickerText { right: 23px; }
+/* New Items Text*/
+#paperReceiptSectionNewItemsText {
+    position: absolute; left: 50%; top: 99px;
+    transform: translateX(-50%);
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 0.8125rem;
+}
+/* Blac bars */
+.paperReceiptSectionBlackBar {
+    position: absolute; left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+    background-color: var(--mainBlack);
+}
+#paperReceiptSectionBelowInformation { 
+    width: 260px;
+    top: 325px; 
+}
+#paperReceiptSectionMod {
+    width: 230px;
+    left: 50%; top: 125px;
+    color: white;
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 30px;
+    padding-left: 30px;
+}
+/* Difficulty */
+#paperReceiptSectionSongNameDifficulty {
+    position: absolute; left: 50%; top: 163px;
+    transform: translateX(-50%);
+    width: 242px;
+}
+/* Top is calculated with a width of 40px for paperReceiptSectionSongNameDifficulty */
+#paperReceiptStats {
+    position: absolute; left: 50%; top: 194px;
+    transform: translateX(-50%);
+    width: 242px;
+    list-style-type: none;
+    padding-left: 0;
+}
+/* Fairy Bread Bakeoff */
+#paperReceiptSectionTournamentNameText {
+    position: absolute; left: 50%; top: 362px;
+    transform: translateX(-50%);
+    width: 250px;
+}
+
+/* Coffee */
+#coffeeImage {
+    position: absolute; left: -300.57px; top: 619.43px;
+    width: 718.15px; height: 718.15px
 }

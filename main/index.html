@@ -6,13 +6,62 @@
     <title>Gameplay</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Spline Sans Mono Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
         <!-- Now Playing Section -->
         <section id="nowPlayingSection">
-            
+            <img id="trianglePaperTop" src="static/triangle-paper.png">
+            <div id="paperReceiptSection">
+                <svg id="paperReceiptFullLineTop" width="260" height="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 1">
+                    <line x1="0" y1="0" x2="260" y2="0" 
+                          stroke="#1E1E1E" stroke-width="1" 
+                          stroke-dasharray="5,6" 
+                          stroke-linecap="round" />
+                </svg>
+                <div class="paperReceiptSectionPickTexts" id="paperReceiptSectionPickText">PICK: </div>
+                <div class="paperReceiptSectionPickTexts mainRedColour" id="paperReceiptSectionPickerText">RED</div>
+                <svg id="paperReceiptFullLineBottom" width="260" height="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 1">
+                    <line x1="0" y1="0" x2="260" y2="0" 
+                          stroke="#1E1E1E" stroke-width="1" 
+                          stroke-dasharray="5,6" 
+                          stroke-linecap="round" />
+                </svg>
+                <svg id="paperReceiptHalfLineLeft" width="85" height="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 1">
+                    <line x1="0" y1="0" x2="85" y2="0" 
+                          stroke="#1E1E1E" stroke-width="1" 
+                          stroke-dasharray="5,6" 
+                          stroke-linecap="round" />
+                </svg>
+                <div id="paperReceiptSectionNewItemsText">NEW ITEMS</div>
+                <svg id="paperReceiptHalfLineRight" width="85" height="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 1">
+                    <line x1="0" y1="0" x2="85" y2="0" 
+                          stroke="#1E1E1E" stroke-width="1" 
+                          stroke-dasharray="5,6" 
+                          stroke-linecap="round" />
+                </svg>
+                <div class="paperReceiptSectionBlackBar" id="paperReceiptSectionMod">DOUBLE TIME 2</div>
+                <div class="splineSansMonoRegularFontSize15LineSize20" id="paperReceiptSectionSongNameDifficulty">Zannen-kei Rinjin-bu Hoshi Futatsuhan [Solitude]</div>
+                <ul class="mainRedColour splineSansMonoRegularFontSize15LineSize20" id="paperReceiptStats">
+                    <li>+ 7.17★</li>
+                    <li>+ 249 BPM</li>
+                    <li>+ CS 3.5</li>
+                    <li>+ AR 10</li>
+                    <li>+ 2:53</li>
+                </ul>
+                <div class="paperReceiptSectionBlackBar" id="paperReceiptSectionBelowInformation"></div>
+                <div class="splineSansMonoRegularFontSize15LineSize20" id="paperReceiptSectionTournamentNameText">Shizu's Fairy Bread Bakeoff</div>
+            </div>
+            <img id="trianglePaperBottom" src="static/triangle-paper.png">
         </section>
+
+        <!-- Coffee Image -->
+        <img id="coffeeImage" src="static/coffee.png">
 
     </div>
 
