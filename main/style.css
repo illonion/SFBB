@@ -132,16 +132,17 @@
 
 /* Gameplay Section */
 #gameplayRed1Section { position: absolute; left: 350px; top: 45px;}
+#gameplayRed2Section { position: absolute; left: 970px; top: 45px;}
 /* Gameplay Screen */
-#gameplayRed1Screen {
+.gameplayScreen {
     width: 600px; height: 450px;
-    /* background-color: #00FF1E; */
+    background-color: #00FF1E;
     border-radius: 40px;
 }
 /* Lives Section */
 /* 209px is the width for 4 lives. */
 /* 165px is the width for 3 lives. */
-#gameplayRed1LivesContainer {
+.gameplayLivesContainer {
     position: absolute; left: 50%; top: 409px;
     transform: translateX(-50%);
     width: 209px;
@@ -152,7 +153,7 @@
     border-radius: 15px;
     width: 209px; height: 57px;
 }
-#gameplayRed1LivesContainerFront {
+.gameplayLivesContainerFront {
     top: 0;
     z-index: 1;
     border: 7px solid var(--borderRed);
@@ -161,9 +162,9 @@
     align-items: center;
     justify-content: center;
 }
-#gameplayRed1LivesContainerBack {
+.gameplayLivesContainerBack {
     top: 7px;
     z-index: 0;
     background-color: var(--borderRed);
 }
-#gameplayRed1LivesContainerFront > * { margin: 0 6px; }
+.gameplayLivesContainerFront > * { margin: 0 6px; }
