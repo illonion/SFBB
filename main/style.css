@@ -146,25 +146,24 @@
     transform: translateX(-50%);
     width: 209px;
 }
+.gameplayRed1LivesContainer {
+    position: absolute; 
+    border: 7px solid var(--borderRed);
+    border-radius: 15px;
+    width: 209px; height: 57px;
+}
 #gameplayRed1LivesContainerFront {
-    position: absolute; top: 0;
+    top: 0;
     z-index: 1;
     border: 7px solid var(--borderRed);
     background-color: #FFF6E8;
-    border-radius: 15px;
-    width: 209px; height: 57px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#gameplayRed1LivesContainerFront > * {
-    margin: 0 6px;
-}
 #gameplayRed1LivesContainerBack {
-    position: absolute; top: 7px;
+    top: 7px;
     z-index: 0;
-    border: 7px solid var(--borderRed);
     background-color: var(--borderRed);
-    border-radius: 15px;
-    width: 209px; height: 57px;
 }
+#gameplayRed1LivesContainerFront > * { margin: 0 6px; }
