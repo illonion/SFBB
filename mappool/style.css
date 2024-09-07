@@ -51,3 +51,22 @@
     color: var(--mainTextDarkRed);
     font-size: 20px;
 }
+
+/* Red Lives */
+#redLives {
+    position: absolute; left: 54px; top: 208px;
+    height: 53px;
+    display: flex;
+}
+#redSlot1, #redSlot2 {
+    margin-right: 10px;
+}
+#redSlot1Lives, #redSlot2Lives {
+    display: flex;
+    height: 35px;
+    align-self: center;
+    margin-right: 31px;
+}
+#redSlot1Lives > *, #redSlot2Lives > * {
+    margin-right: 5px;
+}
