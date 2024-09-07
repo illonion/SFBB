@@ -101,6 +101,11 @@
     display: flex;
     flex-direction: column;
 }
+#mappoolSectionColumn3 {
+    position: absolute; left: 1360px; top: 226px;
+    display: flex;
+    flex-direction: column;
+}
 
 /* Mod Section */
 .modSection { width: 241px; }
@@ -114,6 +119,8 @@
 #hiddenText { color: #D3925E; }
 #hardRockText { color: var(--mainDarkRed); }
 #doubleTimeText { color: #662AA6; }
+#freemodText { color: #15723C; }
+#tiebreakerText { color: var(--mainTextMappoolColour); }
 /* Map Information */
 .mapInformation {
     margin-top: -5px;
@@ -130,3 +137,19 @@
 }
 .mapTextDifficultyName, .mapTextAristName { font-size: 0.9375rem; }
 .mapTextAristName { line-height: 1rem; }
+/* Tiebreaker Border */
+#tiebreakerSection {
+    position: relative;
+}
+#tiebreakerBorder {
+    position: absolute; left: -24px; top: 30px;
+    width: 282px; height: 117px;
+    border: 4px solid #6F4244;
+    border-radius: 30px;
+    z-index: 0;
+}
+#tiebreakerText {
+    position: relative; z-index: 1;
+    background-color: rgb(255, 246, 232);
+    width: 153px;
+}
