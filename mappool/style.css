@@ -1,6 +1,10 @@
 :root {
+    --teamInformationLeft: 60px;
+    --redTeamInformationTop: 60px;
+    --blueTeamInformationTop: 374px;
     --mainTextDarkRed: #4A1C29;
     --mainDarkRed: #80102B;
+    --mainDarkBlue: #2A3CA6;
 }
 
 #main {
@@ -9,15 +13,19 @@
     background-image: url("static/background.png");
 }
 
-/* Red Team Information */
-#redTeamBackground {
-    position: absolute; left: 60px; top: 60px;
+/* Team Background */
+.teamBackground {
+    position: absolute; left: var(--teamInformationLeft);
     width: 495.65px; height: 317.65px;
 }
-#redTeamInformation {
-    position: absolute; left: 60px; top: 60px;
-}
-#redTeamName {
+#redTeamBackground { top: var(--redTeamInformationTop); }
+#blueTeamBackground { top: var(--blueTeamInformationTop); }
+/* Team Information */
+.teamInformation { position: absolute; left: var(--teamInformationLeft); }
+#redTeamInformation { top: var(--redTeamInformationTop); }
+#blueTeamInformation { top: var(--blueTeamInformationTop); }
+/* Team Name */
+.teamName {
     position: absolute; left: 54px; top: 40px;
     white-space: nowrap;
     color: var(--mainDarkRed);
@@ -25,25 +33,33 @@
     font-weight: 400;
     font-size: 2rem;
 }
-#redTeamPlayers {
+#redTeamName { color: var(--mainDarkRed); }
+#blueTeamName { color: var(--mainDarkBlue); }
+/* Team Players */
+.teamPlayers {
     position: absolute; left: 52px; top: 98px;
     width: 416px; height: 94px;
     display: flex;
     flex-wrap: wrap;
 }
-.redTeamPlayer {
+/* Team Player Container */
+.teamPlayerContainer {
     width: 208px;
     height: 50px;
     display: flex;
 }
-.redTeamPlayerProfile {
-    border: 2px solid var(--mainDarkRed);
+/* Team Player Profile */
+.teamPlayerProfile {
+    border: 2px solid;
     width: 40px; height: 40px;
     border-radius: 7px;
     background-size: cover;
     background-image: url("https://a.ppy.sh/8306102")
 }
-.redTeamPlayerName {
+.redTeamPlayerProfile { border-color: var(--mainDarkRed); }
+.blueTeamPlayerProfile { border-color: var(--mainDarkBlue); }
+/* Team Player Name */
+.teamPlayerName {
     margin-left: 8px;
     font-family: "Patrick Hand", cursive;
     font-weight: 400;
@@ -52,21 +68,17 @@
     font-size: 20px;
 }
 
-/* Red Lives */
-#redLives {
+/* Lives */
+.livesContainer {
     position: absolute; left: 54px; top: 208px;
     height: 53px;
     display: flex;
 }
-#redSlot1, #redSlot2 {
-    margin-right: 10px;
-}
-#redSlot1Lives, #redSlot2Lives {
+.slotImage { margin-right: 10px; }
+.slotLivesIndividualContainer {
     display: flex;
     height: 35px;
     align-self: center;
     margin-right: 31px;
 }
-#redSlot1Lives > *, #redSlot2Lives > * {
-    margin-right: 5px;
-}
+.slotLivesIndividualContainer > * { margin-right: 5px; }
