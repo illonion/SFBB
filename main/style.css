@@ -1,6 +1,7 @@
 :root {
     --mainBlack: #1E1E1E;
     --mainRed: #DD3C4C;
+    --borderRed: #80102B;
 }
 
 #main {
@@ -127,4 +128,43 @@
 #coffeeImage {
     position: absolute; left: -300.57px; top: 619.43px;
     width: 718.15px; height: 718.15px
+}
+
+/* Gameplay Section */
+#gameplayRed1Section { position: absolute; left: 350px; top: 45px;}
+/* Gameplay Screen */
+#gameplayRed1Screen {
+    width: 600px; height: 450px;
+    /* background-color: #00FF1E; */
+    border-radius: 40px;
+}
+/* Lives Section */
+/* 209px is the width for 4 lives. */
+/* 165px is the width for 3 lives. */
+#gameplayRed1LivesContainer {
+    position: absolute; left: 50%; top: 409px;
+    transform: translateX(-50%);
+    width: 209px;
+}
+#gameplayRed1LivesContainerFront {
+    position: absolute; top: 0;
+    z-index: 1;
+    border: 7px solid var(--borderRed);
+    background-color: #FFF6E8;
+    border-radius: 15px;
+    width: 209px; height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#gameplayRed1LivesContainerFront > * {
+    margin: 0 6px;
+}
+#gameplayRed1LivesContainerBack {
+    position: absolute; top: 7px;
+    z-index: 0;
+    border: 7px solid var(--borderRed);
+    background-color: var(--borderRed);
+    border-radius: 15px;
+    width: 209px; height: 57px;
 }
