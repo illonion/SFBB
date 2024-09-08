@@ -1,6 +1,8 @@
 :root {
     --receiptLeft: 1022px;
+    --performationsLeft: 1019px;
     --mainReceiptWidth: 742px;
+    --performationsWidth: 748px;
     --topSectionWidth: 616px;
     --receiptLineWidth: 674px;
     --mainMapSectionWidth: 616px;
@@ -17,21 +19,21 @@
 
 /* Performations Top */
 .performations {
-    position: absolute; left: var(--receiptLeft); 
-    width: var(--mainReceiptWidth); height: 24px; 
+    position: absolute; left: var(--performationsLeft); 
+    width: var(--performationsWidth); height: 24px; 
 }
 #performationsTop { top: 50px; }
-/* Height is based on a main map section height of 509.5px */
+/* Need to add height from maintopsection onto top */
 #performationsBottom {
-    top: 681px;
+    top: 680px;
     transform: scale(-1, -1);
 }
 /* Main Receipt */
-/* Height is based on a main map section height of 509.5px */
+/* Need to add height from maintopsection onto height */
 #mainReceipt {
     position: absolute; left: var(--receiptLeft); top: 68px;
     width: 742px; height: 618.5px;
-    background-color: red;
+    background-color: white;
 }
 /* Title */
 #title {
