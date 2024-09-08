@@ -1,6 +1,7 @@
 :root {
     --mainReceiptWidth: 742px;
     --topSectionWidth: 616px;
+    --receiptLineWidth: 674px;
 }
 
 /* Main Page */
@@ -40,3 +41,7 @@
 }
 #topSection > * { width: calc(var(--topSectionWidth) / 2); height: 30px;}
 .topSectionRight { text-align: right; }
+#receiptTopLine {
+    position: relative; left: calc((var(--mainReceiptWidth) - var(--receiptLineWidth)) / 2); top: 77px;
+    width: var(--receiptLineWidth);
+}
