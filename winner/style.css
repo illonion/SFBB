@@ -47,6 +47,10 @@
     position: relative; left: calc((var(--mainReceiptWidth) - var(--receiptLineWidth)) / 2); top: 77px;
     width: var(--receiptLineWidth);
 }
+#receiptBottomLine {
+    position: relative; left: calc((var(--mainReceiptWidth) - var(--receiptLineWidth)) / 2); top: 125px;
+    width: var(--receiptLineWidth);
+}
 /* Main Section */
 #mainMapSection {
     position: relative; left: calc((var(--mainReceiptWidth) - var(--mainMapSectionWidth)) / 2); top: 107px;
