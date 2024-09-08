@@ -1,3 +1,9 @@
+:root {
+    --mainReceiptWidth: 742px;
+    --topSectionWidth: 616px;
+}
+
+/* Main Page */
 #main {
     position: absolute; left: 0; top: 0;
     width: 1920px; height: 1080px;
@@ -8,7 +14,7 @@
 /* Performations Top */
 #performationsTop {
     position: absolute; left: 1019px; top: 50px;
-    width: 748px; height: 24px; 
+    width: var(--mainReceiptWidth); height: 24px; 
 }
 /* Main Receipt */
 #mainReceipt {
@@ -24,3 +30,13 @@
     font-size: 2.875rem;
     line-height: 64px;
 }
+#topSection {
+    position: relative; left: calc((var(--mainReceiptWidth) - var(--topSectionWidth)) / 2); top: 60px;
+    width: var(--topSectionWidth);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Spline Sans Mono", monospace;
+    font-size: 1.25rem;
+}
+#topSection > * { width: calc(var(--topSectionWidth) / 2); height: 30px;}
+.topSectionRight { text-align: right; }
