@@ -1,8 +1,10 @@
 :root {
+    --receiptLeft: 1022px;
     --mainReceiptWidth: 742px;
     --topSectionWidth: 616px;
     --receiptLineWidth: 674px;
     --mainMapSectionWidth: 616px;
+    --qrCodeWidthHeight: 175px;
 }
 
 /* Main Page */
@@ -14,15 +16,22 @@
 }
 
 /* Performations Top */
-#performationsTop {
-    position: absolute; left: 1019px; top: 50px;
+.performations {
+    position: absolute; left: var(--receiptLeft); 
     width: var(--mainReceiptWidth); height: 24px; 
 }
+#performationsTop { top: 50px; }
+/* Height is based on a main map section height of 509.5px */
+#performationsBottom {
+    top: 681px;
+    transform: scale(-1, -1);
+}
 /* Main Receipt */
+/* Height is based on a main map section height of 509.5px */
 #mainReceipt {
-    position: absolute; left: 1022px; top: 68px;
-    width: 742px; height: 1128px;
-    /* background-color: white; */
+    position: absolute; left: var(--receiptLeft); top: 68px;
+    width: 742px; height: 618.5px;
+    background-color: red;
 }
 /* Title */
 #title {
@@ -65,4 +74,21 @@
 #mainMapSection > * { margin-bottom: 11.5px; }
 #mainMapSection div:nth-child(odd) {
     width: 544px;
+}
+
+/* Thanks For Playing Text */
+#thanksForPlayingText {
+    position: relative; top: 159px;
+    width: 100%;
+    text-align: center;
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+/* QR Code */
+#receiptQRCode {
+    position: relative; left: calc((var(--mainReceiptWidth) - var(--qrCodeWidthHeight)) / 2); top: 195px;
+    width: var(--qrCodeWidthHeight); 
+    height: var(--qrCodeWidthHeight);
 }
