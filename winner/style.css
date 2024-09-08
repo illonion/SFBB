@@ -2,6 +2,7 @@
     --mainReceiptWidth: 742px;
     --topSectionWidth: 616px;
     --receiptLineWidth: 674px;
+    --mainMapSectionWidth: 616px;
 }
 
 /* Main Page */
@@ -31,6 +32,7 @@
     font-size: 2.875rem;
     line-height: 64px;
 }
+/* Top Section */
 #topSection {
     position: relative; left: calc((var(--mainReceiptWidth) - var(--topSectionWidth)) / 2); top: 60px;
     width: var(--topSectionWidth);
@@ -44,4 +46,19 @@
 #receiptTopLine {
     position: relative; left: calc((var(--mainReceiptWidth) - var(--receiptLineWidth)) / 2); top: 77px;
     width: var(--receiptLineWidth);
+}
+/* Main Section */
+#mainMapSection {
+    position: relative; left: calc((var(--mainReceiptWidth) - var(--mainMapSectionWidth)) / 2); top: 107px;
+    width: var(--mainMapSectionWidth);
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#mainMapSection > * { margin-bottom: 11.5px; }
+#mainMapSection div:nth-child(odd) {
+    width: 544px;
 }
