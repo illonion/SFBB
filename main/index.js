@@ -196,6 +196,11 @@ const scoreAnimation = {
 // IPC State
 let ipcState, matchResultDisplayed
 
+// Chat Display
+const chatDisplayContainerEl = document.getElementById("chatDisplayContainer")
+const chatDisplayEl = document.getElementById("chatDisplay")
+let chatLen = 0
+
 // Referesh everything
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
@@ -268,8 +273,10 @@ socket.onmessage = event => {
         scoreVisible = data.tourney.manager.bools.scoreVisible
         if (scoreVisible) {
             playingScoresEl.style.opacity = 1
+            chatDisplayContainerEl.style.opacity = 0
         } else {
             playingScoresEl.style.opacity = 0
+            chatDisplayContainerEl.style.opacity = 1
         }
     }
 
@@ -330,6 +337,41 @@ socket.onmessage = event => {
             }
         } else {
             matchResultDisplayed = false
+        }
+    }
+
+    if (!scoreVisible) {
+        // Chat Stuff
+        // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
+        if (chatLen !== data.tourney.manager.chat.length) {
+            (chatLen === 0 || chatLen > data.tourney.manager.chat.length) ? (chatDisplayEl.innerHTML = "", chatLen = 0) : null;
+            const fragment = document.createDocumentFragment();
+
+            for (let i = chatLen; i < data.tourney.manager.chat.length; i++) {
+                const chatColour = data.tourney.manager.chat[i].team;
+
+                // Chat message container
+                const chatMessageContainer = document.createElement("div")
+                chatMessageContainer.classList.add("chatMessageContainer")
+                chatMessageContainer.classList.add(`${chatColour}Chat`)
+
+                // Name
+                const chatUser = document.createElement("div")
+                chatUser.classList.add("chatUser")
+                chatUser.innerText = data.tourney.manager.chat[i].name;
+
+                // Message
+                const chatMessage = document.createElement("div")
+                chatMessage.classList.add("chatMessage")
+                chatMessage.innerText = data.tourney.manager.chat[i].messageBody
+
+                chatMessageContainer.append(chatUser, chatMessage)
+                fragment.append(chatMessageContainer)
+            }
+
+            chatDisplayEl.append(fragment)
+            chatLen = data.tourney.manager.chat.length;
+            chatDisplayEl.scrollTop = chatDisplayEl.scrollHeight;
         }
     }
 }

@@ -1,6 +1,7 @@
 :root {
     --mainBlack: #1E1E1E;
     --mainRed: #DD3C4C;
+    --mainBlue: #226CFF;
     --borderRed: #80102B;
     --borderBlue: #2A3CA6;
     --mainBrown: #B6795E;
@@ -24,13 +25,19 @@
 }
 
 /* Chat Display Section */
+#chatDisplayContainer {
+    transition: 500ms ease-in-out;
+    opacity: 1;
+}
+.redChat { color: var(--mainRed); }
+.blueChat { color: var(--mainBlue); }
+.botChat { color: #6F4244; }
+.unknownChat { color: purple; }
 /* Chat Display Image */
 #chatDisplayImage {
     position: absolute; 
     z-index: 1;
     width: 530px; height: 374px;
-    opacity: 1;
-    transition: 500ms ease-in-out;
 }
 /* Chat Display Container */
 #chatDisplay {
@@ -41,7 +48,9 @@
     z-index: 2;
     width: 410px; height: 220px;
     background-color: white;
+    overflow-y: scroll;
 }
+#chatDisplay::-webkit-scrollbar { display: none; }
 .chatMessageContainer {
     position: relative;
     z-index: 2;
@@ -253,6 +262,7 @@
     position: absolute; left: 1920px; top: 0;
     width: 250px; height: 1080px;
     background-color: var(--mainBrown);
+    color: white;
 }
 #livesSection {
     margin-left: 10px;
@@ -273,6 +283,7 @@ h1 {
     font-size: 1.2em;
     margin-bottom: 10px;
     background-color: transparent;
+    color: white;
 }
 #livesSectionButton > *:active {
     background-color: black;
