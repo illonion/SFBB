@@ -97,36 +97,6 @@ function setNumberOfLives(team, number, action) {
     if (blue1NumberOfLives < 0) blue1NumberOfLives = 0
     if (blue2NumberOfLives < 0) blue2NumberOfLives = 0
 
-    // Set which screens are showing
-    if (red1NumberOfLives === 0) {
-        gameplayRed1ScreenEl.style.opacity = 0
-        gameplayRed1NoLivesLeftEl.style.opacity = 1
-    } else {
-        gameplayRed1ScreenEl.style.opacity = 1
-        gameplayRed1NoLivesLeftEl.style.opacity = 0
-    }
-    if (red2NumberOfLives === 0) {
-        gameplayRed2ScreenEl.style.opacity = 0
-        gameplayRed2NoLivesLeftEl.style.opacity = 1
-    } else {
-        gameplayRed2ScreenEl.style.opacity = 1
-        gameplayRed2NoLivesLeftEl.style.opacity = 0
-    }
-    if (blue1NumberOfLives === 0) {
-        gameplayBlue1ScreenEl.style.opacity = 0
-        gameplayBlue1NoLivesLeftEl.style.opacity = 1
-    } else {
-        gameplayBlue1ScreenEl.style.opacity = 1
-        gameplayBlue1NoLivesLeftEl.style.opacity = 0
-    }
-    if (blue2NumberOfLives === 0) {
-        gameplayBlue2ScreenEl.style.opacity = 0
-        gameplayBlue2NoLivesLeftEl.style.opacity = 1
-    } else {
-        gameplayBlue2ScreenEl.style.opacity = 1
-        gameplayBlue2NoLivesLeftEl.style.opacity = 0
-    }
-
     setDisplayForNumberOfLives()
 }
 
@@ -222,6 +192,9 @@ const scoreAnimation = {
     playScreen3Score: new CountUp(playScreen3ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
     playScreen4Score: new CountUp(playScreen4ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
 }
+
+// IPC State
+let ipcState, matchResultDisplayed
 
 // Referesh everything
 socket.onmessage = event => {
@@ -329,12 +302,34 @@ socket.onmessage = event => {
                 const currentPlayer = data.tourney.ipcClients[i]
                 const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
                 if (currentScore === playScores[currentPlayerRank]) {
-                    console.log("hello")
                     playScreens[i].style.top = `${currentPlayerRank * 110}px`
                     break
                 }
             }
             currentPlayerRank++
+        }
+    }
+
+    // IPC state
+    if (ipcState !== data.tourney.manager.ipcState) {
+        ipcState = data.tourney.manager.ipcState
+        if (ipcState === 4 && !matchResultDisplayed) {
+            matchResultDisplayed = true
+            let finalMinimumPlayScore = Math.min(...playScores.filter(score => score !== 0))
+            console.log(finalMinimumPlayScore)
+            for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+                const currentPlayer = data.tourney.ipcClients[i]
+                const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+                if (currentScore === finalMinimumPlayScore) {
+                    console.log(currentScore)
+                    let team = (i < data.tourney.ipcClients.length / 2)? "red" : "blue"
+                    let number = (i % 2 === 0)? "1" : "2"
+                    setNumberOfLives(team, number, "minus")
+                    break
+                }
+            }
+        } else {
+            matchResultDisplayed = false
         }
     }
 }
