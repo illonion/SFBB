@@ -29,8 +29,8 @@
     transition: 500ms ease-in-out;
     opacity: 1;
 }
-.redChat { color: var(--mainRed); }
-.blueChat { color: var(--mainBlue); }
+.leftChat { color: var(--mainRed); }
+.rightChat { color: var(--mainBlue); }
 .botChat { color: #6F4244; }
 .unknownChat { color: purple; }
 /* Chat Display Image */
