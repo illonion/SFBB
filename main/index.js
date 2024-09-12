@@ -199,6 +199,30 @@ const paperReceiptStatsEl = document.getElementById("paperReceiptStats")
 const paperReceiptSectionBelowInformationEl = document.getElementById("paperReceiptSectionBelowInformation")
 const paperReceiptSectionTournamentNameTextEl = document.getElementById("paperReceiptSectionTournamentNameText")
 
+// Right hand side score details
+const playingScoresEl = document.getElementById("playingScores")
+let scoreVisible
+/* Play Screens */
+const playScreen1El = document.getElementById("playScreen1")
+const playScreen2El = document.getElementById("playScreen2")
+const playScreen3El = document.getElementById("playScreen3")
+const playScreen4El = document.getElementById("playScreen4")
+const playScreens = [playScreen1El, playScreen2El, playScreen3El, playScreen4El]
+let ids = [0,0,0,0]
+/* Play Screen Scores */
+const playScreen1ScoreEl = document.getElementById("playScreen1Score")
+const playScreen2ScoreEl = document.getElementById("playScreen2Score")
+const playScreen3ScoreEl = document.getElementById("playScreen3Score")
+const playScreen4ScoreEl = document.getElementById("playScreen4Score")
+let playScores = [0,0,0,0]
+
+const scoreAnimation = {
+    playScreen1Score: new CountUp(playScreen1ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    playScreen2Score: new CountUp(playScreen2ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    playScreen3Score: new CountUp(playScreen3ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+    playScreen4Score: new CountUp(playScreen4ScoreEl, 0, 0, 0, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: "." }),
+}
+
 // Referesh everything
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
@@ -264,6 +288,54 @@ socket.onmessage = event => {
         paperReceiptStatsCSEl.innerText = `+ CS ${data.menu.bm.stats.CS}`
         paperReceiptStatsAREl.innerText = `+ AR ${data.menu.bm.stats.AR}`
         paperReceiptStatsLENEl.innerText = `+ ${displayLength(parseInt(data.menu.bm.time.full / 1000))}`
+    }
+
+    // Score visibility
+    if (scoreVisible !== data.tourney.manager.bools.scoreVisible) {
+        scoreVisible = data.tourney.manager.bools.scoreVisible
+        if (scoreVisible) {
+            playingScoresEl.style.opacity = 1
+        } else {
+            playingScoresEl.style.opacity = 0
+        }
+    }
+
+    // Update frames, positions, and scores
+    if (scoreVisible) {
+        // 1st - Populate all the details, remove the play screens if they do not exist.
+        for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+            const currentPlayer = data.tourney.ipcClients[i]
+            ids[i] = currentPlayer.spectating.userID
+            if (ids[i] !== 0) {
+                playScreens[i].style.display = "block"
+                playScreens[i].setAttribute("class", (currentPlayer.team === "left") ? "redTeam" : "blueTeam")
+                playScreens[i].children[0].setAttribute("src", `https://a.ppy.sh/${ids[i]}`)
+                playScreens[i].children[1].innerText = currentPlayer.spectating.name
+                playScores[i] = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+                scoreAnimation[`playScreen${i + 1}Score`].update(playScores[i])
+            } else {
+                playScreens[i].style.display = "none"
+                playScores[i] = 0
+            }
+        }
+
+        // Go through all scores
+        playScores = playScores.sort((a, b) => b - a)
+        let currentPlayerRank = 0
+
+        // Sort all the panels
+        while (currentPlayerRank < 4) {
+            for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+                const currentPlayer = data.tourney.ipcClients[i]
+                const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+                if (currentScore === playScores[currentPlayerRank]) {
+                    console.log("hello")
+                    playScreens[i].style.top = `${currentPlayerRank * 110}px`
+                    break
+                }
+            }
+            currentPlayerRank++
+        }
     }
 }
 
