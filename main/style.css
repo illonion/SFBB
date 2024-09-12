@@ -171,6 +171,45 @@
 .gameplayLivesContainerBorderBlue { border-color: var(--borderBlue); }
 .gameplayLivesContainerFront > * { margin: 0 6px; }
 
+/* Playing Scores */
+#playingScores {
+    position: absolute; right: 300px; top: 55px;
+    opacity: 1;
+    transition: 500ms ease-in-out;
+}
+#playingScores > * { 
+    position: absolute;
+    width: 300px; height: 100px; 
+    border-radius: 10px 0 0 10px;
+    transition: 200ms ease-in-out;
+}
+.redTeam { background-color: #fabdc3; }
+.blueTeam { background-color: #84c4ff; }
+#playScreen1 { top: 0; }
+#playScreen2 { top: 110px; }
+#playScreen3 { top: 220px; }
+#playScreen4 { top: 330px; }
+/* Playing screen profile pictures */
+.playScreenProfilePicture {
+    position: absolute; top: 10px; left: 10px;
+    width: 80px; height: 80px;
+    border-radius: 10px;
+}
+/* Play screen name */
+.playScreenName {
+    position: absolute; top: 15px; left: 100px;
+    font-size: 1.1rem;
+    width: 190px;
+    text-wrap: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+/* Play Screen Score */
+.playScreenScore {
+    position: absolute; bottom: 15px; left: 100px;
+    font-size: 2rem;
+}
+
 /* Mappool Menu */
 #mappoolMenu {
     position: absolute; right: 0; bottom: 0;

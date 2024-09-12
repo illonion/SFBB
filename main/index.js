@@ -65,6 +65,17 @@ function createHeart(heartStatus) {
     return newHeartFull
 }
 
+// Gameplay screens
+const gameplayRed1ScreenEl = document.getElementById("gameplayRed1Screen")
+const gameplayRed2ScreenEl = document.getElementById("gameplayRed2Screen")
+const gameplayBlue1ScreenEl = document.getElementById("gameplayBlue1Screen")
+const gameplayBlue2ScreenEl = document.getElementById("gameplayBlue2Screen")
+// No Lives Left
+const gameplayRed1NoLivesLeftEl = document.getElementById("gameplayRed1NoLivesLeft")
+const gameplayRed2NoLivesLeftEl = document.getElementById("gameplayRed2NoLivesLeft")
+const gameplayBlue1NoLivesLeftEl = document.getElementById("gameplayBlue1NoLivesLeft")
+const gameplayBlue2NoLivesLeftEl = document.getElementById("gameplayBlue2NoLivesLeft")
+
 // Set number of lives
 function setNumberOfLives(team, number, action) {
     if (team === "red" && number === "1" && action === "plus") red1NumberOfLives++
@@ -81,6 +92,40 @@ function setNumberOfLives(team, number, action) {
     if (red2NumberOfLives > rightTotalLives) red2NumberOfLives = rightTotalLives
     if (blue1NumberOfLives > leftTotalLives) blue1NumberOfLives = leftTotalLives
     if (blue2NumberOfLives > rightTotalLives) blue2NumberOfLives = rightTotalLives
+    if (red1NumberOfLives < 0) red1NumberOfLives = 0
+    if (red2NumberOfLives < 0) red2NumberOfLives = 0
+    if (blue1NumberOfLives < 0) blue1NumberOfLives = 0
+    if (blue2NumberOfLives < 0) blue2NumberOfLives = 0
+
+    // Set which screens are showing
+    if (red1NumberOfLives === 0) {
+        gameplayRed1ScreenEl.style.opacity = 0
+        gameplayRed1NoLivesLeftEl.style.opacity = 1
+    } else {
+        gameplayRed1ScreenEl.style.opacity = 1
+        gameplayRed1NoLivesLeftEl.style.opacity = 0
+    }
+    if (red2NumberOfLives === 0) {
+        gameplayRed2ScreenEl.style.opacity = 0
+        gameplayRed2NoLivesLeftEl.style.opacity = 1
+    } else {
+        gameplayRed2ScreenEl.style.opacity = 1
+        gameplayRed2NoLivesLeftEl.style.opacity = 0
+    }
+    if (blue1NumberOfLives === 0) {
+        gameplayBlue1ScreenEl.style.opacity = 0
+        gameplayBlue1NoLivesLeftEl.style.opacity = 1
+    } else {
+        gameplayBlue1ScreenEl.style.opacity = 1
+        gameplayBlue1NoLivesLeftEl.style.opacity = 0
+    }
+    if (blue2NumberOfLives === 0) {
+        gameplayBlue2ScreenEl.style.opacity = 0
+        gameplayBlue2NoLivesLeftEl.style.opacity = 1
+    } else {
+        gameplayBlue2ScreenEl.style.opacity = 1
+        gameplayBlue2NoLivesLeftEl.style.opacity = 0
+    }
 
     setDisplayForNumberOfLives()
 }
