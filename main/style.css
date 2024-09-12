@@ -3,6 +3,7 @@
     --mainRed: #DD3C4C;
     --borderRed: #80102B;
     --borderBlue: #2A3CA6;
+    --mainBrown: #B6795E;
 }
 
 #main {
@@ -11,13 +12,13 @@
     background-image: url("static/background.png");
     background-size: cover;
     overflow: hidden;
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
 }
 
 /* Helper Classes */
 .mainRedColour { color: var(--mainRed); }
 .splineSansMonoRegularFontSize15LineSize20 {
-    font-family: "Spline Sans Mono", monospace;
-    font-weight: 400;
     font-size: 0.9375rem;
     line-height: 20px;
 }
@@ -68,8 +69,6 @@
 /* Paper Receipt Section Pick Texts */
 .paperReceiptSectionPickTexts {
     position: absolute; top: 18px;
-    font-family: "Spline Sans Mono", monospace;
-    font-weight: 400;
     font-size: 1.25rem;
 }
 #paperReceiptSectionPickText {
@@ -80,8 +79,6 @@
 #paperReceiptSectionNewItemsText {
     position: absolute; left: 50%; top: 99px;
     transform: translateX(-50%);
-    font-family: "Spline Sans Mono", monospace;
-    font-weight: 400;
     font-size: 0.8125rem;
 }
 /* Blac bars */
@@ -177,4 +174,35 @@
 /* Mappool Menu */
 #mappoolMenu {
     position: absolute; right: 0; bottom: 0;
+}
+
+/* Side bar */
+#sideBar {
+    position: absolute; left: 1920px; top: 0;
+    width: 250px; height: 1080px;
+    background-color: var(--mainBrown);
+}
+#livesSection {
+    margin-left: 10px;
+}
+h1 {
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+}
+#livesSectionButton {
+    margin-left: 10px;
+    width: 210px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#livesSectionButton > * {
+    width: 100px; height: 50px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+#livesSectionButton > *:active {
+    background-color: black;
+    color: var(--mainBrown);
 }

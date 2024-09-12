@@ -1,11 +1,132 @@
+// Elements aboudt number of lives
+// Front
+const gameplayRed1LivesContainerFrontEl = document.getElementById("gameplayRed1LivesContainerFront")
+const gameplayRed2LivesContainerFrontEl = document.getElementById("gameplayRed2LivesContainerFront")
+const gameplayBlue1LivesContainerFrontEl = document.getElementById("gameplayBlue1LivesContainerFront")
+const gameplayBlue2LivesContainerFrontEl = document.getElementById("gameplayBlue2LivesContainerFront")
+// Back
+const gameplayRed1LivesContainerBackEl = document.getElementById("gameplayRed1LivesContainerBack")
+const gameplayRed2LivesContainerBackEl = document.getElementById("gameplayRed2LivesContainerBack")
+const gameplayBlue1LivesContainerBackEl = document.getElementById("gameplayBlue1LivesContainerBack")
+const gameplayBlue2LivesContainerBackEl = document.getElementById("gameplayBlue2LivesContainerBack")
+
+// Information about number of lives
+let leftTotalLives = 0
+let rightTotalLives = 0
+let red1NumberOfLives = 0
+let red2NumberOfLives = 0
+let blue1NumberOfLives = 0
+let blue2NumberOfLives = 0
+
 // Get mappool
 let allBeatmaps
 async function getMappool() {
     const response = await fetch("../_data/beatmaps.json")
     const responseJson = await response.json()
     allBeatmaps = responseJson.beatmaps
+
+    // Set number of lives
+    switch (responseJson.roundName) {
+        case "QF": case "SF":
+            leftTotalLives = 3
+            rightTotalLives = 3
+            break
+        case "F": case "GF":
+            leftTotalLives = 4
+            rightTotalLives = 3
+            break
+    }
+    red1NumberOfLives = leftTotalLives
+    red2NumberOfLives = rightTotalLives
+    blue1NumberOfLives = leftTotalLives
+    blue2NumberOfLives = rightTotalLives
+
+    // Set all the hearts in all the slots
+    setDisplayForNumberOfLives()
+
+    if (gameplayRed1LivesContainerFrontEl.childElementCount === 4) {
+        gameplayRed1LivesContainerFrontEl.style.width = "209px"
+        gameplayBlue1LivesContainerFrontEl.style.width = "209px"
+        gameplayRed1LivesContainerBackEl.style.width = "209px"
+        gameplayBlue1LivesContainerBackEl.style.width = "209px"
+    } else {
+        gameplayRed1LivesContainerFrontEl.style.width = "165px"
+        gameplayBlue1LivesContainerFrontEl.style.width = "165px"
+        gameplayRed1LivesContainerBackEl.style.width = "165px"
+        gameplayBlue1LivesContainerBackEl.style.width = "165px"
+    }
 }
 getMappool()
+
+// Create heart full
+function createHeart(heartStatus) {
+    const newHeartFull = document.createElement("img")
+    newHeartFull.setAttribute("src", `static/${heartStatus}.png`)
+    return newHeartFull
+}
+
+// Set number of lives
+function setNumberOfLives(team, number, action) {
+    if (team === "red" && number === "1" && action === "plus") red1NumberOfLives++
+    else if (team === "red" && number === "1" && action === "minus") red1NumberOfLives--
+    else if (team === "red" && number === "2" && action === "plus") red2NumberOfLives++
+    else if (team === "red" && number === "2" && action === "minus") red2NumberOfLives--
+    else if (team === "blue" && number === "1" && action === "plus") blue1NumberOfLives++
+    else if (team === "blue" && number === "1" && action === "minus") blue1NumberOfLives--
+    else if (team === "blue" && number === "2" && action === "plus") blue2NumberOfLives++
+    else if (team === "blue" && number === "2" && action === "minus") blue2NumberOfLives--
+
+    // Set bounds
+    if (red1NumberOfLives > leftTotalLives) red1NumberOfLives = leftTotalLives
+    if (red2NumberOfLives > rightTotalLives) red2NumberOfLives = rightTotalLives
+    if (blue1NumberOfLives > leftTotalLives) blue1NumberOfLives = leftTotalLives
+    if (blue2NumberOfLives > rightTotalLives) blue2NumberOfLives = rightTotalLives
+
+    setDisplayForNumberOfLives()
+}
+
+function setDisplayForNumberOfLives() {
+    gameplayRed1LivesContainerFrontEl.innerHTML = ""
+    gameplayRed2LivesContainerFrontEl.innerHTML = ""
+    gameplayBlue1LivesContainerFrontEl.innerHTML = ""
+    gameplayBlue2LivesContainerFrontEl.innerHTML = ""
+
+    // Red 1 number
+    let red1Number = 0
+    for (red1Number; red1Number < red1NumberOfLives; red1Number++) {
+        gameplayRed1LivesContainerFrontEl.append(createHeart('heartFull'))
+    }
+    for (red1Number; red1Number < leftTotalLives; red1Number++) {
+        gameplayRed1LivesContainerFrontEl.append(createHeart('heartBroken'))
+    }
+
+    // Red 2 number
+    let red2Number = 0
+    for (red2Number; red2Number < red2NumberOfLives; red2Number++) {
+        gameplayRed2LivesContainerFrontEl.append(createHeart('heartFull'))
+    }
+    for (red2Number; red2Number < leftTotalLives; red2Number++) {
+        gameplayRed2LivesContainerFrontEl.append(createHeart('heartBroken'))
+    }
+
+    // Blue 1 number
+    let blue1Number = 0
+    for (blue1Number; blue1Number < blue1NumberOfLives; blue1Number++) {
+        gameplayBlue1LivesContainerFrontEl.append(createHeart('heartFull'))
+    }
+    for (blue1Number; blue1Number < leftTotalLives; blue1Number++) {
+        gameplayBlue1LivesContainerFrontEl.append(createHeart('heartBroken'))
+    }
+
+    // Blue 2 number
+    let blue2Number = 0
+    for (blue2Number; blue2Number < blue2NumberOfLives; blue2Number++) {
+        gameplayBlue2LivesContainerFrontEl.append(createHeart('heartFull'))
+    }
+    for (blue2Number; blue2Number < leftTotalLives; blue2Number++) {
+        gameplayBlue2LivesContainerFrontEl.append(createHeart('heartBroken'))
+    }
+}
 
 // Find maps in mappool
 const findMapInMapool = beatmapID => allBeatmaps.find(beatmap => beatmap.beatmapID === beatmapID)
