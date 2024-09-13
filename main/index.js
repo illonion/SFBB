@@ -120,7 +120,7 @@ function setDisplayForNumberOfLives() {
     for (red2Number; red2Number < red2NumberOfLives; red2Number++) {
         gameplayRed2LivesContainerFrontEl.append(createHeart('heartFull'))
     }
-    for (red2Number; red2Number < leftTotalLives; red2Number++) {
+    for (red2Number; red2Number < rightTotalLives; red2Number++) {
         gameplayRed2LivesContainerFrontEl.append(createHeart('heartBroken'))
     }
 
@@ -138,9 +138,17 @@ function setDisplayForNumberOfLives() {
     for (blue2Number; blue2Number < blue2NumberOfLives; blue2Number++) {
         gameplayBlue2LivesContainerFrontEl.append(createHeart('heartFull'))
     }
-    for (blue2Number; blue2Number < leftTotalLives; blue2Number++) {
+    for (blue2Number; blue2Number < rightTotalLives; blue2Number++) {
         gameplayBlue2LivesContainerFrontEl.append(createHeart('heartBroken'))
     }
+
+    // Set cookies
+    document.cookie = `leftTotalLives=${leftTotalLives}; path=/`
+    document.cookie = `rightTotalLives=${rightTotalLives}; path=/`
+    document.cookie = `red1NumberOfLives=${red1NumberOfLives}; path=/`
+    document.cookie = `red2NumberOfLives=${red2NumberOfLives}; path=/`
+    document.cookie = `blue1NumberOfLives=${blue1NumberOfLives}; path=/`
+    document.cookie = `blue2NumberOfLives=${blue2NumberOfLives}; path=/`
 }
 
 // Find maps in mappool

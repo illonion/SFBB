@@ -87,3 +87,87 @@ socket.onmessage = event => {
         }
     }
 }
+
+// Information about number of lives
+let leftTotalLives = 0
+let rightTotalLives = 0
+let red1NumberOfLives = 0
+let red2NumberOfLives = 0
+let blue1NumberOfLives = 0
+let blue2NumberOfLives = 0
+
+// Number of lives
+const redSlot1LivesEl = document.getElementById("redSlot1Lives")
+const redSlot2LivesEl = document.getElementById("redSlot2Lives")
+const blueSlot1LivesEl = document.getElementById("blueSlot1Lives")
+const blueSlot2LivesEl = document.getElementById("blueSlot2Lives")
+
+// Get Cookie
+function getCookie(cname) {
+    let name = cname + "="
+    let ca = document.cookie.split(';')
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i]
+        while (c.charAt(0) == ' ') c = c.substring(1)
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+setInterval(() => {
+    // Setting the number of lives
+    leftTotalLives = getCookie("leftTotalLives")
+    rightTotalLives = getCookie("rightTotalLives")
+    red1NumberOfLives = getCookie("red1NumberOfLives")
+    red2NumberOfLives = getCookie("red2NumberOfLives")
+    blue1NumberOfLives = getCookie("blue1NumberOfLives")
+    blue2NumberOfLives = getCookie("blue2NumberOfLives")
+
+    redSlot1LivesEl.innerHTML = ""
+    redSlot2LivesEl.innerHTML = ""
+    blueSlot1LivesEl.innerHTML = ""
+    blueSlot2LivesEl.innerHTML = ""
+
+    // Red 1 number
+    let red1Number = 0
+    for (red1Number; red1Number < red1NumberOfLives; red1Number++) {
+        redSlot1LivesEl.append(createHeart('heartFull'))
+    }
+    for (red1Number; red1Number < leftTotalLives; red1Number++) {
+        redSlot1LivesEl.append(createHeart('heartBroken'))
+    }
+
+    // Red 2 number
+    let red2Number = 0
+    for (red2Number; red2Number < red2NumberOfLives; red2Number++) {
+        redSlot2LivesEl.append(createHeart('heartFull'))
+    }
+    for (red2Number; red2Number < rightTotalLives; red2Number++) {
+        redSlot2LivesEl.append(createHeart('heartBroken'))
+    }
+
+    // Blue 1 number
+    let blue1Number = 0
+    for (blue1Number; blue1Number < blue1NumberOfLives; blue1Number++) {
+        blueSlot1LivesEl.append(createHeart('heartFull'))
+    }
+    for (blue1Number; blue1Number < leftTotalLives; blue1Number++) {
+        blueSlot1LivesEl.append(createHeart('heartBroken'))
+    }
+
+    // Blue 2 number
+    let blue2Number = 0
+    for (blue2Number; blue2Number < blue2NumberOfLives; blue2Number++) {
+        blueSlot2LivesEl.append(createHeart('heartFull'))
+    }
+    for (blue2Number; blue2Number < rightTotalLives; blue2Number++) {
+        blueSlot2LivesEl.append(createHeart('heartBroken'))
+    }
+}, 500)
+
+// Create heart full
+function createHeart(heartStatus) {
+    const newHeartFull = document.createElement("img")
+    newHeartFull.setAttribute("src", `static/${heartStatus}.png`)
+    return newHeartFull
+}

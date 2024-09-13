@@ -47,7 +47,6 @@
     font-size: 1.25rem;
     z-index: 2;
     width: 410px; height: 220px;
-    background-color: white;
     overflow-y: scroll;
 }
 #chatDisplay::-webkit-scrollbar { display: none; }
