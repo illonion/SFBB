@@ -63,9 +63,14 @@ async function getMappool() {
         const mapOutOfOrderTextImage = document.createElement("img")
         mapOutOfOrderTextImage.classList.add("mapOutOfOrderTextImage")
 
+        // Pick images
+        const mapPickImage = document.createElement("img")
+        mapPickImage.classList.add("mapPickImage")
+
+        // Append everything together
         mapOutOfOrderInformation.append(mapOutOfOrderBannerImage, mapOutOfOrderTextImage)
         mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName)
-        mapInformation.append(mapTextInformation, mapStarInformation, mapOutOfOrderInformation)
+        mapInformation.append(mapTextInformation, mapStarInformation, mapOutOfOrderInformation, mapPickImage)
 
         switch (allBeatmaps[i].mod) {
             case "NM":
@@ -119,7 +124,6 @@ let chatLen = 0
 // Referesh everything
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
-    console.log(data)
 
     if (currentRedTeamName !== data.tourney.manager.teamName.left && allTeams) {
         currentRedTeamName = data.tourney.manager.teamName.left
@@ -185,14 +189,14 @@ socket.onmessage = event => {
                     bubbles: true,
                     cancelable: true,
                     view: window,
-                    button: (nextAutoPicker === "Red")? 0 : 2
+                    button: (currentNextPicker === "red")? 0 : 2
                 })
                 element.dispatchEvent(event)
                 element.setAttribute("data-is-autopicked", "true")
     
-                if (nextAutoPicker === "red") {
+                if (currentNextPicker === "red") {
                     setNextPicker("blue")
-                } else if (nextAutoPicker === "blue") {
+                } else if (currentNextPicker === "blue") {
                     setNextPicker("red")
                 }
             }
@@ -331,18 +335,22 @@ function mapClickEvent() {
     // If map is reset
     if (action === "reset") {
         this.children[2].style.display = "none"
+        this.children[3].style.display = "none"
         this.removeAttribute("data-is-autopicked")
     }
     // If map is banned
     if (action === "ban") {
         // Ban section 
+        this.children[3].style.display = "none"
         this.children[2].style.display = "block"
         this.children[2].children[0].setAttribute("src", `static/out-of-stock/out-of-stock-${team}-background.png`)
         this.children[2].children[1].setAttribute("src", `static/out-of-stock/out-of-stock-${team}.png`)
     }
     // If map is picked
     if (action === "pick") {
-        
+        this.children[2].style.display = "none"
+        this.children[3].style.display = "block"
+        this.children[3].setAttribute("src", `static/picks/pick${team[0].toUpperCase() + team.substring(1)}.svg`)
     }
 }
 

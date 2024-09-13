@@ -152,6 +152,13 @@
     position: absolute; left: 50%; top: 50%;
     transform: translate(-50%, -50%);
 }
+/* Pick Image */
+.mapPickImage {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 291px; height: 69px;
+    display: none;
+}
 /* Tiebreaker Border */
 #tiebreakerSection {
     position: relative;
