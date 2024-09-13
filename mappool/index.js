@@ -29,6 +29,7 @@ async function getMappool() {
         mapInformation.classList.add("mapInformation")
         mapInformation.addEventListener("mousedown", mapClickEvent)
         mapInformation.addEventListener("contextmenu", function(event) {event.preventDefault()})
+        mapInformation.dataset.id = allBeatmaps[i].beatmapID
 
         // Map text information
         const mapTextInformation = document.createElement("div")
@@ -63,8 +64,8 @@ async function getMappool() {
         mapOutOfOrderTextImage.classList.add("mapOutOfOrderTextImage")
 
         mapOutOfOrderInformation.append(mapOutOfOrderBannerImage, mapOutOfOrderTextImage)
-        mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName, mapOutOfOrderInformation)
-        mapInformation.append(mapTextInformation, mapStarInformation)
+        mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName)
+        mapInformation.append(mapTextInformation, mapStarInformation, mapOutOfOrderInformation)
 
         switch (allBeatmaps[i].mod) {
             case "NM":
@@ -260,5 +261,23 @@ function mapClickEvent() {
     if (event.ctrlKey) action = "ban"
     if (event.shiftKey) action = "reset"
 
-    console.log(team, action)
+    // Current map
+    const currentMap = findMapInMappool(parseInt(this.dataset.id))
+    if (!currentMap) return
+
+    // If map is reset
+    if (action === "reset") {
+        this.children[2].style.display = "none"
+    }
+    // If map is banned
+    if (action === "ban") {
+        // Ban section 
+        this.children[2].style.display = "block"
+        this.children[2].children[0].setAttribute("src", `static/out-of-stock-${team}-background.png`)
+        this.children[2].children[1].setAttribute("src", `static/out-of-stock-${team}.png`)
+    }
+    // If map is picked
+    if (action === "pick") {
+        
+    }
 }
