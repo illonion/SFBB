@@ -307,7 +307,7 @@ setInterval(() => {
 // Create heart full
 function createHeart(heartStatus) {
     const newHeartFull = document.createElement("img")
-    newHeartFull.setAttribute("src", `static/${heartStatus}.png`)
+    newHeartFull.setAttribute("src", `static/hearts/${heartStatus}.png`)
     return newHeartFull
 }
 
@@ -337,8 +337,8 @@ function mapClickEvent() {
     if (action === "ban") {
         // Ban section 
         this.children[2].style.display = "block"
-        this.children[2].children[0].setAttribute("src", `static/out-of-stock-${team}-background.png`)
-        this.children[2].children[1].setAttribute("src", `static/out-of-stock-${team}.png`)
+        this.children[2].children[0].setAttribute("src", `static/out-of-stock/out-of-stock-${team}-background.png`)
+        this.children[2].children[1].setAttribute("src", `static/out-of-stock/out-of-stock-${team}.png`)
     }
     // If map is picked
     if (action === "pick") {
