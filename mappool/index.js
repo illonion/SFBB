@@ -278,6 +278,22 @@ function mapClickEvent() {
     }
     // If map is picked
     if (action === "pick") {
-        
+
     }
+}
+
+// Setting the next picker
+const nextPickerEl = document.getElementById("nextPicker")
+let currentNextPicker = "red"
+function setNextPicker(colour) {
+    nextPickerEl.innerText = colour[0].toUpperCase() + colour.substring(1)
+    currentNextPicker = colour
+}
+
+// Toggle autopick
+const autopickingButtonEl = document.getElementById("autopickingButton")
+let isAutopickEnabled = false
+function toggleAutopick() {
+    isAutopickEnabled = !isAutopickEnabled
+    autopickingButtonEl.innerText = `Toggle Autopick: ${(isAutopickEnabled)? "ON": "OFF"}`
 }

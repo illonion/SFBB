@@ -6,6 +6,7 @@
     --mainDarkRed: #80102B;
     --mainDarkBlue: #2A3CA6;
     --mainTextMappoolColour: #300E00;
+    --mainBrown: #FFF5E7;
 }
 
 #main {
@@ -166,4 +167,39 @@
     position: relative; z-index: 1;
     background-color: rgb(255, 246, 232);
     width: 153px;
+}
+
+/* Side bar */
+#sideBar {
+    position: absolute; left: 1920px; top: 0;
+    width: 250px; height: 1080px;
+    background-color: var(--mainBrown);
+}
+#nextPickerSection { margin-left: 10px; }
+h1 {
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    margin: 10px 0 5px 0;
+}
+#nextPicker { 
+    font-size: 3rem; 
+    margin: 10px 0;
+}
+#nextPickerButtons {
+    margin-left: 10px;
+    width: 210px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#nextPickerButtons > * {
+    width: 100px; height: 50px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+#autopickingButton { width: 210px; }
+#nextPickerButtons > *:active {
+    background-color: black;
+    color: var(--mainBrown);
 }
