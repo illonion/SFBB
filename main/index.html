@@ -35,7 +35,7 @@
                           stroke-linecap="round" />
                 </svg>
                 <div class="paperReceiptSectionPickTexts" id="paperReceiptSectionPickText">PICK: </div>
-                <div class="paperReceiptSectionPickTexts mainRedColour" id="paperReceiptSectionPickerText">RED</div>
+                <div class="paperReceiptSectionPickTexts mainRedColour" id="paperReceiptSectionPickerText"></div>
                 <svg id="paperReceiptFullLineBottom" width="260" height="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 1">
                     <line x1="0" y1="0" x2="260" y2="0" 
                           stroke="#1E1E1E" stroke-width="1" 
@@ -159,6 +159,13 @@
                 <button onclick="setNumberOfLives('blue','1','minus')">Blue 1 --</button>
                 <button onclick="setNumberOfLives('blue','2','plus')">Blue 2 ++</button>
                 <button onclick="setNumberOfLives('blue','2','minus')">Blue 2 --</button>
+            </div>
+        </section>
+        <section id="setCurrentPickerSection">
+            <h1>Set the current picker:</h1>
+            <div id="livesSectionButton">
+                <button onclick="manualSetCurrentPicker('red')">Red</button>
+                <button onclick="manualSetCurrentPicker('blue')">Blue</button>
             </div>
         </section>
     </div>

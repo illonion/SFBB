@@ -351,6 +351,7 @@ function mapClickEvent() {
         this.children[2].style.display = "none"
         this.children[3].style.display = "block"
         this.children[3].setAttribute("src", `static/picks/pick${team[0].toUpperCase() + team.substring(1)}.svg`)
+        document.cookie= `currentPicker=${team}; path=/`
     }
 }
 

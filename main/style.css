@@ -19,6 +19,7 @@
 
 /* Helper Classes */
 .mainRedColour { color: var(--mainRed); }
+.mainBlueColour { color: var(--mainBlue); }
 .splineSansMonoRegularFontSize15LineSize20 {
     font-size: 0.9375rem;
     line-height: 20px;
@@ -262,7 +263,7 @@
     width: 250px; height: 1080px;
     background-color: var(--mainBrown);
 }
-#livesSection {
+#livesSection, #setCurrentPickerSection {
     margin-left: 10px;
 }
 h1 {

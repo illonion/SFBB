@@ -391,3 +391,46 @@ function displayLength(songLengthSeconds) {
     const seconds = Math.floor(totalSeconds % 60).toString().padStart(2, '0')
     return `${minutes}:${seconds}`
 }
+
+// Get Cookie
+function getCookie(cname) {
+    let name = cname + "="
+    let ca = document.cookie.split(';')
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i]
+        while (c.charAt(0) == ' ') c = c.substring(1)
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+// Set current picker
+let currentPicker = "red"
+function setCurrentPicker() {
+    paperReceiptSectionPickerTextEl.innerText = currentPicker.toUpperCase()
+    if (currentPicker === "red") {
+        paperReceiptSectionPickerTextEl.classList.remove("mainBlueColour")
+        paperReceiptSectionPickerTextEl.classList.add("mainRedColour")
+        paperReceiptStatsEl.classList.remove("mainBlueColour")
+        paperReceiptStatsEl.classList.add("mainRedColour")
+    } else {
+        paperReceiptSectionPickerTextEl.classList.add("mainBlueColour")
+        paperReceiptSectionPickerTextEl.classList.remove("mainRedColour")
+        paperReceiptStatsEl.classList.add("mainBlueColour")
+        paperReceiptStatsEl.classList.remove("mainRedColour")
+    }
+    document.cookie= `currentPicker=${currentPicker}; path=/`
+}
+
+// Set current picker from mappool
+setInterval(() => {
+    currentPicker = getCookie("currentPicker")
+    setCurrentPicker()
+}, 500)
+
+// Manually set current picker
+function manualSetCurrentPicker(colour) {
+    document.cookie= `currentPicker=${colour}; path=/`
+    currentPicker = colour
+    setCurrentPicker()
+}
