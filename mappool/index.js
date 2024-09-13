@@ -8,12 +8,70 @@ async function getTeams() {
 getTeams()
 const findTeamInTeamsJson = teamName => allTeams.find(team => team.team_name === teamName)
 
+// Mod sections
+const noModSectionEl = document.getElementById("noModSection")
+const hiddenSectionEl = document.getElementById("hiddenSection")
+const hardRockSectionEl = document.getElementById("hardRockSection")
+const doubleTimeSectionEl = document.getElementById("doubleTimeSection")
+const freemodSectionEl = document.getElementById("freemodSection")
+const tiebreakerSectionEl = document.getElementById("tiebreakerSection")
+
 // Get mappool
 let allBeatmaps
 async function getMappool() {
     const response = await fetch("../_data/beatmaps.json")
     const responseJson = await response.json()
     allBeatmaps = responseJson.beatmaps
+
+    for (let i = 0; i < allBeatmaps.length; i++) {
+        const mapInformation = document.createElement("div")
+        mapInformation.classList.add("mapInformation")
+
+        const mapTextInformation = document.createElement("div")
+        mapTextInformation.classList.add("mapTextInformation")
+
+        const mapTextSongName = document.createElement("div")
+        mapTextSongName.classList.add("mapTextSongName")
+        mapTextSongName.innerText = allBeatmaps[i].songName
+
+        const mapTextDifficultyName = document.createElement("div")
+        mapTextDifficultyName.classList.add("mapTextDifficultyName")
+        mapTextDifficultyName.innerText = allBeatmaps[i].difficultyname
+
+        const mapTextAristName = document.createElement("div")
+        mapTextAristName.classList.add("mapTextAristName")
+        mapTextAristName.innerText = allBeatmaps[i].artist
+
+        const mapStarInformation = document.createElement("div")
+        mapStarInformation.classList.add("mapStarInformation")
+        mapStarInformation.innerText = Math.round(parseFloat(allBeatmaps[i].difficultyrating) * 100) / 100
+
+        mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName)
+        mapInformation.append(mapTextInformation, mapStarInformation)
+
+        switch (allBeatmaps[i].mod) {
+            case "NM":
+                noModSectionEl.append(mapInformation)
+                break
+            case "HD":
+                hiddenSectionEl.append(mapInformation)
+                break
+            case "HR":
+                hardRockSectionEl.append(mapInformation)
+                break
+            case "DT":
+                doubleTimeSectionEl.append(mapInformation)
+                break
+            case "FM":
+                freemodSectionEl.append(mapInformation)
+                break
+            case "TB":
+                mapInformation.style.alignItems = "center"
+                mapInformation.style.height = "90px"
+                tiebreakerSectionEl.append(mapInformation)
+                break
+        }
+    }
 }
 getMappool()
 const findMapInMappool = beatmapID => allBeatmaps.find(map => map.beatmapID === beatmapID)
