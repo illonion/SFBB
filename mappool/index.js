@@ -111,33 +111,10 @@ const blueTeamPlayersEl = document.getElementById("blueTeamPlayers")
 
 // Current beatmaps
 let currentBeatmapId, currentBeatmapMd5
-if (currentBeatmapId !== data.menu.bm.id || currentBeatmapMd5 !== data.menu.bm.md5 && allBeatmaps) {
-    currentBeatmapId = data.menu.bm.id
-    currentBeatmapMd5 = data.menu.bm.md5
-    
-    if (autoPickerOn) {
-        // Find button to click on
-        let element = document.querySelector(`[data-id="${currentBeatmapId}"]`)
 
-        // Check if autopicked already
-        if (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true") {
-            const event = new MouseEvent('mousedown', {
-                bubbles: true,
-                cancelable: true,
-                view: window,
-                button: (nextAutoPicker === "Red")? 0 : 2
-            })
-            element.dispatchEvent(event)
-            element.setAttribute("data-is-autopicked", "true")
-
-            if (nextAutoPicker === "red") {
-                setNextPicker("blue")
-            } else if (nextAutoPicker === "blue") {
-                setNextPicker("red")
-            }
-        }
-    }
-}
+// Chat display
+const chatDisplayEl = document.getElementById("chatDisplay")
+let chatLen = 0
 
 // Referesh everything
 socket.onmessage = event => {
@@ -191,6 +168,62 @@ socket.onmessage = event => {
                 blueTeamPlayersEl.append(teamPlayerContainer)
             }
         }
+    }
+
+    // Autopicking
+    if (currentBeatmapId !== data.menu.bm.id || currentBeatmapMd5 !== data.menu.bm.md5 && allBeatmaps) {
+        currentBeatmapId = data.menu.bm.id
+        currentBeatmapMd5 = data.menu.bm.md5
+        
+        if (isAutopickEnabled) {
+            // Find button to click on
+            let element = document.querySelector(`[data-id="${currentBeatmapId}"]`)
+    
+            // Check if autopicked already
+            if (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true") {
+                const event = new MouseEvent('mousedown', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                    button: (nextAutoPicker === "Red")? 0 : 2
+                })
+                element.dispatchEvent(event)
+                element.setAttribute("data-is-autopicked", "true")
+    
+                if (nextAutoPicker === "red") {
+                    setNextPicker("blue")
+                } else if (nextAutoPicker === "blue") {
+                    setNextPicker("red")
+                }
+            }
+        }
+    }
+
+    // Chat Stuff
+    // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
+    if (chatLen !== data.tourney.manager.chat.length) {
+        (chatLen === 0 || chatLen > data.tourney.manager.chat.length) ? (chatDisplayEl.innerHTML = "", chatLen = 0) : null;
+        const fragment = document.createDocumentFragment();
+        for (let i = chatLen; i < data.tourney.manager.chat.length; i++) {
+            const chatColour = data.tourney.manager.chat[i].team;
+            // Chat message container
+            const chatMessageContainer = document.createElement("div")
+            chatMessageContainer.classList.add("chatMessageContainer")
+            chatMessageContainer.classList.add(`${chatColour}Chat`)
+            // Name
+            const chatUser = document.createElement("div")
+            chatUser.classList.add("chatUser")
+            chatUser.innerText = data.tourney.manager.chat[i].name;
+            // Message
+            const chatMessage = document.createElement("div")
+            chatMessage.classList.add("chatMessage")
+            chatMessage.innerText = data.tourney.manager.chat[i].messageBody
+            chatMessageContainer.append(chatUser, chatMessage)
+            fragment.append(chatMessageContainer)
+        }
+        chatDisplayEl.append(fragment)
+        chatLen = data.tourney.manager.chat.length;
+        chatDisplayEl.scrollTop = chatDisplayEl.scrollHeight;
     }
 }
 
@@ -298,6 +331,7 @@ function mapClickEvent() {
     // If map is reset
     if (action === "reset") {
         this.children[2].style.display = "none"
+        this.removeAttribute("data-is-autopicked")
     }
     // If map is banned
     if (action === "ban") {
@@ -308,7 +342,7 @@ function mapClickEvent() {
     }
     // If map is picked
     if (action === "pick") {
-
+        
     }
 }
 
