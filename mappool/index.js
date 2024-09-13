@@ -109,6 +109,36 @@ let currentRedTeamName, currentBlueTeamName
 const redTeamPlayersEl = document.getElementById("redTeamPlayers")
 const blueTeamPlayersEl = document.getElementById("blueTeamPlayers")
 
+// Current beatmaps
+let currentBeatmapId, currentBeatmapMd5
+if (currentBeatmapId !== data.menu.bm.id || currentBeatmapMd5 !== data.menu.bm.md5 && allBeatmaps) {
+    currentBeatmapId = data.menu.bm.id
+    currentBeatmapMd5 = data.menu.bm.md5
+    
+    if (autoPickerOn) {
+        // Find button to click on
+        let element = document.querySelector(`[data-id="${currentBeatmapId}"]`)
+
+        // Check if autopicked already
+        if (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true") {
+            const event = new MouseEvent('mousedown', {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                button: (nextAutoPicker === "Red")? 0 : 2
+            })
+            element.dispatchEvent(event)
+            element.setAttribute("data-is-autopicked", "true")
+
+            if (nextAutoPicker === "red") {
+                setNextPicker("blue")
+            } else if (nextAutoPicker === "blue") {
+                setNextPicker("red")
+            }
+        }
+    }
+}
+
 // Referesh everything
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
