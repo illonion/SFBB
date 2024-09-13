@@ -124,6 +124,7 @@
 #tiebreakerText { color: var(--mainTextMappoolColour); }
 /* Map Information */
 .mapInformation {
+    position: relative;
     margin-top: -5px;
     margin-bottom: 17px;
     display: flex;
@@ -138,6 +139,18 @@
 }
 .mapTextDifficultyName, .mapTextAristName { font-size: 0.9375rem; }
 .mapTextAristName { line-height: 1rem; }
+
+/* Ban Information */
+.mapOutOfOrderInformation {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 295px; height: 74px;
+    display: none;
+}
+.mapOutOfOrderInformation > * {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+}
 /* Tiebreaker Border */
 #tiebreakerSection {
     position: relative;

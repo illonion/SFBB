@@ -24,9 +24,13 @@ async function getMappool() {
     allBeatmaps = responseJson.beatmaps
 
     for (let i = 0; i < allBeatmaps.length; i++) {
+        // Map information
         const mapInformation = document.createElement("div")
         mapInformation.classList.add("mapInformation")
+        mapInformation.addEventListener("mousedown", mapClickEvent)
+        mapInformation.addEventListener("contextmenu", function(event) {event.preventDefault()})
 
+        // Map text information
         const mapTextInformation = document.createElement("div")
         mapTextInformation.classList.add("mapTextInformation")
 
@@ -42,11 +46,24 @@ async function getMappool() {
         mapTextAristName.classList.add("mapTextAristName")
         mapTextAristName.innerText = allBeatmaps[i].artist
 
+        // Map star information
         const mapStarInformation = document.createElement("div")
         mapStarInformation.classList.add("mapStarInformation")
         mapStarInformation.innerText = Math.round(parseFloat(allBeatmaps[i].difficultyrating) * 100) / 100
 
-        mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName)
+        // Map out of order ban information
+        const mapOutOfOrderInformation = document.createElement("div")
+        mapOutOfOrderInformation.classList.add("mapOutOfOrderInformation")
+
+        // Images
+        const mapOutOfOrderBannerImage = document.createElement("img")
+        mapOutOfOrderBannerImage.classList.add("mapOutOfOrderBannerImage")
+
+        const mapOutOfOrderTextImage = document.createElement("img")
+        mapOutOfOrderTextImage.classList.add("mapOutOfOrderTextImage")
+
+        mapOutOfOrderInformation.append(mapOutOfOrderBannerImage, mapOutOfOrderTextImage)
+        mapTextInformation.append(mapTextSongName, mapTextDifficultyName, mapTextAristName, mapOutOfOrderInformation)
         mapInformation.append(mapTextInformation, mapStarInformation)
 
         switch (allBeatmaps[i].mod) {
@@ -228,4 +245,20 @@ function createHeart(heartStatus) {
     const newHeartFull = document.createElement("img")
     newHeartFull.setAttribute("src", `static/${heartStatus}.png`)
     return newHeartFull
+}
+
+// Map click event
+function mapClickEvent() {
+    // Team
+    let team
+    if (event.button === 0) team = "red"
+    else if (event.button === 2) team = "blue"
+    if (!team) return
+
+    // Action
+    let action = "pick"
+    if (event.ctrlKey) action = "ban"
+    if (event.shiftKey) action = "reset"
+
+    console.log(team, action)
 }
