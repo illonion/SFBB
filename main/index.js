@@ -1,4 +1,9 @@
 // Elements aboudt number of lives
+// Container
+const gameplayRed1LivesContainerEl = document.getElementById("gameplayRed1LivesContainer")
+const gameplayRed2LivesContainerEl = document.getElementById("gameplayRed2LivesContainer")
+const gameplayBlue1LivesContainerEl = document.getElementById("gameplayBlue1LivesContainer")
+const gameplayBlue2LivesContainerEl = document.getElementById("gameplayBlue2LivesContainer")
 // Front
 const gameplayRed1LivesContainerFrontEl = document.getElementById("gameplayRed1LivesContainerFront")
 const gameplayRed2LivesContainerFrontEl = document.getElementById("gameplayRed2LivesContainerFront")
@@ -49,11 +54,19 @@ async function getMappool() {
         gameplayBlue1LivesContainerFrontEl.style.width = "209px"
         gameplayRed1LivesContainerBackEl.style.width = "209px"
         gameplayBlue1LivesContainerBackEl.style.width = "209px"
+        gameplayRed1LivesContainerEl.style.width = "209px"
+        gameplayRed2LivesContainerEl.style.width = "209px"
+        gameplayBlue1LivesContainerEl.style.width = "209px"
+        gameplayBlue2LivesContainerEl.style.width = "209px"
     } else {
         gameplayRed1LivesContainerFrontEl.style.width = "165px"
         gameplayBlue1LivesContainerFrontEl.style.width = "165px"
         gameplayRed1LivesContainerBackEl.style.width = "165px"
         gameplayBlue1LivesContainerBackEl.style.width = "165px"
+        gameplayRed1LivesContainerEl.style.width = "165px"
+        gameplayRed2LivesContainerEl.style.width = "165px"
+        gameplayBlue1LivesContainerEl.style.width = "165px"
+        gameplayBlue2LivesContainerEl.style.width = "165px"
     }
 }
 getMappool()

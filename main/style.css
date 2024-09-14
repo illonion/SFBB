@@ -188,13 +188,12 @@
 .gameplayLivesContainer {
     position: absolute; left: 50%; top: 409px;
     transform: translateX(-50%);
-    width: 209px;
 }
 .gameplayLivesContainerSection {
     position: absolute; 
     border: 7px solid;
     border-radius: 15px;
-    width: 209px; height: 57px;
+    height: 57px;
 }
 .gameplayLivesContainerFront {
     top: 0;
