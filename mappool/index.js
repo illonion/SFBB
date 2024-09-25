@@ -121,6 +121,10 @@ let currentBeatmapId, currentBeatmapMd5
 const chatDisplayEl = document.getElementById("chatDisplay")
 let chatLen = 0
 
+// IPC State
+ipcState
+let playScores = [0,0,0,0]
+
 // Referesh everything
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
@@ -229,6 +233,33 @@ socket.onmessage = event => {
         chatLen = data.tourney.manager.chat.length;
         chatDisplayEl.scrollTop = chatDisplayEl.scrollHeight;
     }
+
+    // Get current score
+    for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+        const currentPlayer = data.tourney.ipcClients[i]
+        ids[i] = currentPlayer.spectating.userID
+        playScores[i] = 0
+        if (ids[i] !== 0) playScores[i] = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+    }
+
+    // Winner stuff
+    if (ipcState !== data.tourney.manager.ipcState) {
+        ipcState = data.tourney.manager.ipcState
+        if (ipcState === 4) {
+            matchResultDisplayed = true
+            let finalMinimumPlayScore = Math.min(...playScores.filter(score => score !== 0))
+            for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+                const currentPlayer = data.tourney.ipcClients[i]
+                const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+                if (currentScore === finalMinimumPlayScore) {
+                    allWinners.push((i < data.tourney.ipcClients.length / 2)? "blue" : "red")
+                    // Set all picks cookie information
+                    document.cookie = `allWinners=${allWinners.join(";")} ; path=/`
+                    break
+                }
+            }
+        }
+    }
 }
 
 // Information about number of lives
@@ -315,6 +346,12 @@ function createHeart(heartStatus) {
     return newHeartFull
 }
 
+// Store picks somewhere
+let allPicks = []
+let allWinners = []
+document.cookie = `allPicks=${allPicks.join(";")} ; path=/`
+document.cookie = `allWinners=${allWinners.join(";")} ; path=/`
+
 // Map click event
 function mapClickEvent() {
     // Team
@@ -337,6 +374,11 @@ function mapClickEvent() {
         this.children[2].style.display = "none"
         this.children[3].style.display = "none"
         this.removeAttribute("data-is-autopicked")
+        const index = allPicks.indexOf(parseInt(this.dataset.id))
+        if (index !== -1) {
+            allPicks.splice(index, 1)
+            allWinners.splice(index, 1)
+        }
     }
     // If map is banned
     if (action === "ban") {
@@ -352,7 +394,11 @@ function mapClickEvent() {
         this.children[3].style.display = "block"
         this.children[3].setAttribute("src", `static/picks/pick${team[0].toUpperCase() + team.substring(1)}.svg`)
         document.cookie= `currentPicker=${team}; path=/`
+        allPicks.add(parseInt(this.dataset.id))
     }
+
+    // Set all picks cookie information
+    document.cookie = `allPicks=${allPicks.join(";")} ; path=/`
 }
 
 // Setting the next picker
