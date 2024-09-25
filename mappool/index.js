@@ -132,6 +132,7 @@ socket.onmessage = event => {
     if (currentRedTeamName !== data.tourney.manager.teamName.left && allTeams) {
         currentRedTeamName = data.tourney.manager.teamName.left
         redTeamNameEl.innerText = currentRedTeamName
+        document.cookie = `redTeamName=${currentRedTeamName}; path=/`
 
         const currentTeam = findTeamInTeamsJson(currentRedTeamName)
         if (currentTeam) {
@@ -156,6 +157,7 @@ socket.onmessage = event => {
     if (currentBlueTeamName !== data.tourney.manager.teamName.right && allTeams) {
         currentBlueTeamName = data.tourney.manager.teamName.right
         blueTeamNameEl.innerText = currentBlueTeamName
+        document.cookie = `blueTeamName=${currentBlueTeamName}; path=/`
 
         const currentTeam = findTeamInTeamsJson(currentBlueTeamName)
         if (currentTeam) {
