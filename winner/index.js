@@ -34,6 +34,10 @@ const mainMapSectionEl = document.getElementById("mainMapSection")
 let currentMapString, previousMapString
 let currentWinnerString, previousWinnerString
 
+// Change styling only
+const mainReceiptEl = document.getElementById("mainReceipt")
+const performationsBottomEl = document.getElementById("performationsBottom")
+
 window.setInterval(() => {
     // Team name
     redTeamName = getCookie("redTeamName")
@@ -94,4 +98,8 @@ window.setInterval(() => {
         }
         previousMapString = currentWinnerString
     }
+
+    // Set styles
+    mainReceiptEl.style.height = `${mainMapSectionEl.getBoundingClientRect().height + 618.5}px`
+    performationsBottomEl.style.top = `${mainMapSectionEl.getBoundingClientRect().height + 680}px`
 }, 500)
