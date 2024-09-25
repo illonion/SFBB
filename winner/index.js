@@ -1,3 +1,13 @@
+// Get mappool
+let allBeatmaps
+async function getMappool() {
+    const response = await fetch("../_data/beatmaps.json")
+    const responseJson = await response.json()
+    allBeatmaps = responseJson.beatmaps
+}
+getMappool()
+const findMapInMappool = beatmapID => allBeatmaps.find(map => map.beatmapID === beatmapID)
+
 // Date
 const dateNumberEl = document.getElementById("dateNumber")
 let currentDate = new Date()
@@ -18,6 +28,11 @@ function getCookie(cname) {
     }
     return "";
 }
+
+// Main map section
+const mainMapSectionEl = document.getElementById("mainMapSection")
+let currentMapString, previousMapString
+let currentWinnerString, previousWinnerString
 
 window.setInterval(() => {
     // Team name
@@ -44,4 +59,34 @@ window.setInterval(() => {
     } else teamNameTextEl.innerText = ""
     teamNameTextEl.style.color = `var(--${currentWinningTeam}Win)`
 
+    // get current maps
+    currentMapString = getCookie("allMaps")
+    mainMapSectionEl.innerHTML = ""
+    if (currentMapString !== previousMapString) {
+        let currentMaps = currentMapString.split(";")
+        for (let i = 0; i < currentMaps.length; i++) {
+            const currentMap = findMapInMappool(parseInt(currentMaps[i]))
+            if (!currentMap) continue
+
+            const newMapDiv = document.createElement("div")
+            newMapDiv.innerText = `${currentMap.mod.toUpperCase()}${currentMap.order} - ${currentMap.songName} [${currentMap.difficultyname}]`
+            
+            const newDiv2Div = docuemnt.createElement("div")
+            newDiv2Div.innerText = `${Math.round(parseFloat(currentMap.difficultyrating) * 100) / 100}`
+        }
+
+        previousMapString = currentMapString
+    }
+
+    // Get current winners
+    currentWinnerString = getCookie("allWinners")
+    if (currentWinnerString !== previousMapString) {
+        let currentWinners = currentWinnerString.split(";")
+        let lowIterationNumber = Math.min(currentMaps.length, currentWinners.length)
+        
+        for (let i = 0; i < lowIterationNumber * 2; i += 2) {
+            mainMapSectionEl.style.color = `var(--${currentWinners[Math.floor(i / 2)]}Win)`
+        }
+        previousMapString = currentWinnerString
+    }
 }, 500)
