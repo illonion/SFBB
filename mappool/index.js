@@ -123,6 +123,7 @@ let chatLen = 0
 
 // IPC State
 let ipcState
+let setWinnerYet = false
 let ids = [0,0,0,0]
 let playScores = [0,0,0,0]
 
@@ -249,18 +250,23 @@ socket.onmessage = event => {
     if (ipcState !== data.tourney.manager.ipcState) {
         ipcState = data.tourney.manager.ipcState
         if (ipcState === 4) {
-            matchResultDisplayed = true
-            let finalMinimumPlayScore = Math.min(...playScores.filter(score => score !== 0))
-            for (let i = 0; i < data.tourney.ipcClients.length; i++) {
-                const currentPlayer = data.tourney.ipcClients[i]
-                const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
-                if (currentScore === finalMinimumPlayScore) {
-                    allWinners.push((i < data.tourney.ipcClients.length / 2)? "blue" : "red")
-                    // Set all picks cookie information
-                    document.cookie = `allWinners=${allWinners.join(",")} ; path=/`
-                    break
+            if (!setWinnerYet) {
+                matchResultDisplayed = true
+                let finalMinimumPlayScore = Math.min(...playScores.filter(score => score !== 0))
+                for (let i = 0; i < data.tourney.ipcClients.length; i++) {
+                    const currentPlayer = data.tourney.ipcClients[i]
+                    const currentScore = currentPlayer.gameplay.score * ((currentPlayer.gameplay.mods.str.includes("EZ"))? 2 : 1)
+                    if (currentScore === finalMinimumPlayScore) {
+                        allWinners.push((i < data.tourney.ipcClients.length / 2)? "blue" : "red")
+                        // Set all picks cookie information
+                        document.cookie = `allWinners=${allWinners.join(",")} ; path=/`
+                        break
+                    }
                 }
+                setWinnerYet = true
             }
+        } else {
+            setWinnerYet = false
         }
     }
 }

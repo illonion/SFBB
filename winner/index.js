@@ -93,8 +93,8 @@ window.setInterval(() => {
     if (currentWinnerString !== previousMapString) {
         let lowIterationNumber = Math.min(currentMaps.length, currentWinners.length)
         
-        for (let i = 0; i < lowIterationNumber * 2; i += 2) {
-            mainMapSectionEl.style.color = `var(--${currentWinners[Math.floor(i / 2)]}Win)`
+        for (let i = 0; i < lowIterationNumber * 2; i++) {
+            mainMapSectionEl.children[i].style.color = `var(--${currentWinners[Math.floor(i / 2)]}Win)`
         }
         previousMapString = currentWinnerString
     }
