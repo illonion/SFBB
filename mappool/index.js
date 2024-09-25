@@ -122,7 +122,8 @@ const chatDisplayEl = document.getElementById("chatDisplay")
 let chatLen = 0
 
 // IPC State
-ipcState
+let ipcState
+let ids = [0,0,0,0]
 let playScores = [0,0,0,0]
 
 // Referesh everything
@@ -256,7 +257,7 @@ socket.onmessage = event => {
                 if (currentScore === finalMinimumPlayScore) {
                     allWinners.push((i < data.tourney.ipcClients.length / 2)? "blue" : "red")
                     // Set all picks cookie information
-                    document.cookie = `allWinners=${allWinners.join(";")} ; path=/`
+                    document.cookie = `allWinners=${allWinners.join(",")} ; path=/`
                     break
                 }
             }
@@ -396,11 +397,12 @@ function mapClickEvent() {
         this.children[3].style.display = "block"
         this.children[3].setAttribute("src", `static/picks/pick${team[0].toUpperCase() + team.substring(1)}.svg`)
         document.cookie= `currentPicker=${team}; path=/`
-        allPicks.add(parseInt(this.dataset.id))
+        console.log(this.dataset.id)
+        allPicks.push(parseInt(this.dataset.id))
     }
 
     // Set all picks cookie information
-    document.cookie = `allPicks=${allPicks.join(";")} ; path=/`
+    document.cookie = `allPicks=${allPicks.join(",")} ; path=/`
 }
 
 // Setting the next picker

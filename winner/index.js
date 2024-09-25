@@ -59,11 +59,14 @@ window.setInterval(() => {
     } else teamNameTextEl.innerText = ""
     teamNameTextEl.style.color = `var(--${currentWinningTeam}Win)`
 
-    // get current maps
-    currentMapString = getCookie("allMaps")
+    // if no maps, don't do anything
+    if (!allBeatmaps) return
+
+    // Get current maps
+    currentMapString = getCookie("allPicks")
     mainMapSectionEl.innerHTML = ""
+    let currentMaps = currentMapString.split(",")
     if (currentMapString !== previousMapString) {
-        let currentMaps = currentMapString.split(";")
         for (let i = 0; i < currentMaps.length; i++) {
             const currentMap = findMapInMappool(parseInt(currentMaps[i]))
             if (!currentMap) continue
@@ -71,8 +74,10 @@ window.setInterval(() => {
             const newMapDiv = document.createElement("div")
             newMapDiv.innerText = `${currentMap.mod.toUpperCase()}${currentMap.order} - ${currentMap.songName} [${currentMap.difficultyname}]`
             
-            const newDiv2Div = docuemnt.createElement("div")
+            const newDiv2Div = document.createElement("div")
             newDiv2Div.innerText = `${Math.round(parseFloat(currentMap.difficultyrating) * 100) / 100}`
+
+            mainMapSectionEl.append(newMapDiv, newDiv2Div)
         }
 
         previousMapString = currentMapString
@@ -80,8 +85,8 @@ window.setInterval(() => {
 
     // Get current winners
     currentWinnerString = getCookie("allWinners")
+    let currentWinners = currentWinnerString.split(",")
     if (currentWinnerString !== previousMapString) {
-        let currentWinners = currentWinnerString.split(";")
         let lowIterationNumber = Math.min(currentMaps.length, currentWinners.length)
         
         for (let i = 0; i < lowIterationNumber * 2; i += 2) {
