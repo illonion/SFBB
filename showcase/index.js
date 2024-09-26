@@ -1,4 +1,5 @@
-// Twitch Chat
+// ---------- Twitch Chat Section ----------
+// Twitch Chat 
 const chatDisplay = document.getElementById("chatDisplay")
 ComfyJS.onChat = ( user, message, flags, self, extra ) => {
     console.log(user, message, flags, self, extra)
@@ -48,3 +49,25 @@ function deleteAllMessagesFromUser(twitchId) {
 }
 
 ComfyJS.Init( "shizunaa_tournaments" )
+
+// ---------- Now Playing Information Section ----------
+// Socket Events
+// Credits: VictimCrasher - https://github.com/VictimCrasher/static/tree/master/WaveTournament
+const socket = new ReconnectingWebSocket("ws://" + location.host + "/ws")
+socket.onopen = () => { console.log("Successfully Connected") }
+socket.onclose = event => { console.log("Socket Closed Connection: ", event); socket.send("Client Closed!") }
+socket.onerror = error => { console.log("Socket Error: ", error) }
+
+// Get mappool
+let allBeatmaps
+async function getMappool() {
+    const response = await fetch("../_data/beatmaps.json")
+    const responseJson = await response.json()
+    allBeatmaps = responseJson.beatmaps
+}
+getMappool()
+
+socket.onmessage = event => {
+    const data = JSON.parse(event.data)
+    console.log(data)
+}
