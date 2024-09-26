@@ -1,3 +1,12 @@
+:root {
+    --mainBlack: #1E1E1E;
+    --mainRed: #DD3C4C;
+    --mainBlue: #226CFF;
+    --borderRed: #80102B;
+    --borderBlue: #2A3CA6;
+    --mainBrown: #B6795E;
+}
+
 /* Main */
 #main {
     position: absolute; left: 0; top: 0;
@@ -30,3 +39,107 @@
     text-align: right;
 }
 .chatMessage { width: 260px; }
+
+/* Now Playing Section */
+#nowPlayingSection {
+    position: absolute; left: 31px; top: 433px;
+    width: 287.81px;
+    color: var(--mainBlack);
+    font-family: "Spline Sans Mono", monospace;
+}
+#trianglePaperTop {
+    position: relative; top: 7px;
+    margin-left: -8px;
+    width: 304px; height: 9px;
+}
+#trianglePaperBottom {
+    position: relative; top: -9px;
+    margin-left: -8px;
+    width: 304px; height: 9px;
+    rotate: -180deg;
+}
+/* Paper receipt section */
+/* Width is calculated with a width of 40px for paperReceiptSectionSongNameDifficulty */
+#paperReceiptSection {
+    position: relative;
+    background-color: white;
+    width: inherit; height: 480px;
+}
+/* New Items */
+#newItemsSection {
+    position: absolute; left: 50%; top: 10px;
+    transform: translateX(-50%);
+    display: flex; 
+}
+#newItemsText {
+    font-size: 0.8125rem;
+    line-height: 20px;
+    width: 72px;
+    margin: 0 9px;
+}
+/* Black bars */
+.paperReceiptSectionBlackBar {
+    position: absolute; left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+    background-color: var(--mainBlack);
+}
+#paperReceiptSectionBelowInformation { 
+    width: 260px;
+    top: 237px; 
+}
+#paperReceiptSectionMod {
+    width: 230px;
+    left: 50%; top: 38px;
+    color: white;
+    font-family: "Spline Sans Mono", monospace;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 30px;
+    padding-left: 30px;
+}
+/* Difficulty */
+#paperReceiptSectionSongNameDifficulty {
+    position: absolute; left: 50%; top: 76px;
+    transform: translateX(-50%);
+    width: 242px;
+}
+/* Top is calculated with a width of 40px for paperReceiptSectionSongNameDifficulty */
+#paperReceiptStats {
+    position: absolute; left: 50%; top: 106px;
+    transform: translateX(-50%);
+    width: 242px;
+    list-style-type: none;
+    padding-left: 0;
+}
+/* Fairy Bread Bakeoff */
+#paperReceiptSectionTournamentNameText {
+    position: absolute; left: 51.4%; top: 275px;
+    transform: translateX(-50%);
+    width: 250px;
+    font-size: 0.8125rem;
+}
+.splineSansMonoRegularFontSize15LineSize20 {
+    font-size: 0.9375rem;
+    line-height: 20px;
+}
+/* Bottom Lines */
+.paperReceiptFullLine {
+    position: absolute; left: 50%; 
+    transform: translateX(-50%);
+}
+#paperReceiptFullLineTop { top: 305px; }
+#paperReceiptFullLineBottom { top: 348px; }
+/* Replays Text */
+#replaysText {
+    position: absolute; left: 50%; top: 318px;
+    transform: translateX(-50%);
+    font-family: "Spline Sans Mono";
+    font-size: 20px;
+    line-height: 16px;
+    white-space: nowrap;
+    width: 260px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+}

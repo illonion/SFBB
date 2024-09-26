@@ -10,12 +10,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
+        <!-- Chat section -->
         <img id="chatDisplayImage" src="static/chat.svg">
         <div id="chatDisplay"></div>
+
+        <!-- Now Playing Section -->
+        <section id="nowPlayingSection">
+            <img id="trianglePaperTop" src="static/triangle-paper.png">
+            <div id="paperReceiptSection">
+                <!-- New Items -->
+                <section id="newItemsSection">
+                    <img src="static/lineTopLeft.svg">
+                    <div id="newItemsText">NEW ITEMS</div>
+                    <img src="static/lineTopRight.svg">
+                </section>
+                <!-- Mod -->
+                <div class="paperReceiptSectionBlackBar" id="paperReceiptSectionMod">DOUBLE TIME 2</div>
+                <!-- Title -->
+                <div class="splineSansMonoRegularFontSize15LineSize20" id="paperReceiptSectionSongNameDifficulty">Zannen-kei Rinjin-bu Hoshi Futatsuhan [Solitude]</div>
+                <!-- Stats -->
+                <ul class="mainRedColour splineSansMonoRegularFontSize15LineSize20" id="paperReceiptStats">
+                    <li id="paperReceiptStatsSR">+ 7.17★</li>
+                    <li id="paperReceiptStatsBPM">+ 249 BPM</li>
+                    <li id="paperReceiptStatsCS">+ CS 3.5</li>
+                    <li id="paperReceiptStatsAR">+ AR 10</li>
+                    <li id="paperReceiptStatsLEN">+ 2:53</li>
+                </ul>
+                <!-- Next black bar -->
+                <div class="paperReceiptSectionBlackBar" id="paperReceiptSectionBelowInformation"></div>
+                <div class="splineSansMonoRegularFontSize15LineSize20" id="paperReceiptSectionTournamentNameText">Shizunaa's Fairy Bread Bakeoff</div>
+                <!-- Lines -->
+                <img class="paperReceiptFullLine" id="paperReceiptFullLineTop" src="static/line.svg">
+                <img class="paperReceiptFullLine" id="paperReceiptFullLineBottom" src="static/line.svg">
+                <!-- Replays -->
+                <div id="replaysText">REPLAYS: <span id="">EMERALD AGES</span></div>
+            </div>
+            <img id="trianglePaperBottom" src="static/triangle-paper.png">
+        </section>
     </div>
     <script src="index.js"></script>
 </body>
