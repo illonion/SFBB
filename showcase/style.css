@@ -16,7 +16,7 @@
 }
 
 /* Chat Display */
-#chatDisplayImage { position: absolute; left: 0; top: 0; }
+#chatDisplayImage { position: absolute; left: 0; top: 0; z-index: 2; }
 #chatDisplay {
     position: absolute; left: 60px; top: 39px;
     font-family: "Patrick Hand", cursive;
@@ -142,4 +142,18 @@
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
+}
+
+/* Coffee */
+#coffee {
+    position: absolute; left: 0; bottom: 0;
+}
+
+/* Gameplay */
+#gameplay {
+    position: absolute; left: 345px; top: 107px;
+    width: 1539px; height: 866px;
+    background-color: #00FF1E;
+    border-radius: 40px;
+    z-index: 0;
 }
