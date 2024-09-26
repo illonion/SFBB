@@ -7,11 +7,9 @@
 }
 
 /* Chat Display */
-#chatDisplayImage {
-    position: absolute; left: 0; top: 0;
-}
+#chatDisplayImage { position: absolute; left: 0; top: 0; }
 #chatDisplay {
-    position: absolute; left: 100px; top: 100px;
+    position: absolute; left: 60px; top: 39px;
     font-family: "Patrick Hand", cursive;
     font-weight: 400;
     font-size: 1.25rem;
@@ -24,12 +22,11 @@
     position: relative;
     z-index: 2;
     display: flex;
+    color: rgb(111,66,68);
 }
 .chatUser {
     width: 130px;
     margin-right: 20px;
     text-align: right;
 }
-.chatMessage {
-    width: 260px;
-}
+.chatMessage { width: 260px; }

@@ -1,8 +1,31 @@
 // Twitch Chat
-const twitchChatContainer = document.getElementById("twitchChatContainer")
-const badgeTypes = ["broadcaster", "mod", "vip", "founder", "subscriber"]
+const chatDisplay = document.getElementById("chatDisplay")
 ComfyJS.onChat = ( user, message, flags, self, extra ) => {
     console.log(user, message, flags, self, extra)
+
+    // Get rid of nightbot messages
+    if (user === "Nightbot") return
+
+    // Message container 
+    const messageContainer = document.createElement("div")
+    messageContainer.classList.add("chatMessageContainer")
+    messageContainer.setAttribute("id", extra.id)
+    messageContainer.setAttribute("data-twitch-id", extra.userId)
+
+    // Message user
+    const messageUser = document.createElement("div")
+    messageUser.classList.add("chatUser")
+    messageUser.innerText = user
+
+    // Message
+    const chatMessage = document.createElement("div")
+    chatMessage.classList.add("chatMessage")
+    chatMessage.innerText = message
+
+    // Append everything together
+    messageContainer.append(messageUser, chatMessage)
+    chatDisplay.append(messageContainer)
+    chatDisplay.scrollTop = chatDisplay.scrollHeight
 }
 
 // Delete message
