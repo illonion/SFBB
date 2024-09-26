@@ -1,0 +1,35 @@
+/* Main */
+#main {
+    position: absolute; left: 0; top: 0;
+    width: 1920px; height: 1080px;
+    background-image: url("static/background.svg");
+    background-size: cover;
+}
+
+/* Chat Display */
+#chatDisplayImage {
+    position: absolute; left: 0; top: 0;
+}
+#chatDisplay {
+    position: absolute; left: 100px; top: 100px;
+    font-family: "Patrick Hand", cursive;
+    font-weight: 400;
+    font-size: 1.25rem;
+    z-index: 2;
+    width: 410px; height: 220px;
+    overflow-y: scroll;
+}
+#chatDisplay::-webkit-scrollbar { display: none; }
+.chatMessageContainer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+}
+.chatUser {
+    width: 130px;
+    margin-right: 20px;
+    text-align: right;
+}
+.chatMessage {
+    width: 260px;
+}
