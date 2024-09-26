@@ -66,8 +66,52 @@ async function getMappool() {
     allBeatmaps = responseJson.beatmaps
 }
 getMappool()
+const findMapInMappool = beatmapID => allBeatmaps.find(map => map.beatmapID === beatmapID)
+
+// Now playing information
+const paperReceiptSectionModEl = document.getElementById("paperReceiptSectionMod")
+const paperReceiptSectionSongNameDifficultyEl = document.getElementById("paperReceiptSectionSongNameDifficulty")
+// Stats
+const paperReceiptStatsSREl = document.getElementById("paperReceiptStatsSR")
+const paperReceiptStatsBPMEl = document.getElementById("paperReceiptStatsBPM")
+const paperReceiptStatsCSEl = document.getElementById("paperReceiptStatsCS")
+const paperReceiptStatsAREl = document.getElementById("paperReceiptStatsAR")
+const paperReceiptStatsLENEl = document.getElementById("paperReceiptStatsLEN")
+// Replayer Name
+const replayerNameEl = document.getElementById("replayerName")
+// Styling attributes 
+const paperReceiptStatsEl = document.getElementById("paperReceiptStats")
+const paperReceiptSectionBelowInformationEl = document.getElementById("paperReceiptSectionBelowInformation")
+const paperReceiptSectionTournamentNameTextEl = document.getElementById("paperReceiptSectionTournamentNameText")
+const paperReceiptFullLineTopEl = document.getElementById("paperReceiptFullLineTop")
+const paperReceiptFullLineBottomEl = document.getElementById("paperReceiptFullLineBottom")
+const replaysTextEl = document.getElementById("replaysText")
+// Variables
+let currentMapId, currentMapMd5
 
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
     console.log(data)
+
+    if (currentMapId !== data.menu.bm.id || currentMapMd5 !== data.menu.bm.md5 && allBeatmaps) {
+        currentMapId = data.menu.bm.id
+        currentMapMd5 = data.menu.bm.md5
+
+        // Get name and difficulty of song
+        paperReceiptSectionSongNameDifficultyEl.innerText = `${data.menu.bm.metadata.title} [${data.menu.bm.metadata.difficulty}]`
+        adjustTops(paperReceiptSectionSongNameDifficultyEl.getBoundingClientRect().height)
+
+        // Find map from mappool
+
+    }
+}
+
+// Adjust heights and tops
+function adjustTops(height) {
+    paperReceiptStatsEl.style.top = `${66 + height}px`
+    paperReceiptSectionBelowInformationEl.style.top = `${197 + height}px`
+    paperReceiptSectionTournamentNameTextEl.style.top = `${235 + height}px`
+    paperReceiptFullLineTopEl.style.top = `${265 + height}px`
+    paperReceiptFullLineBottomEl.style.top = `${308 + height}px`
+    replaysTextEl.style.top = `${278 + height}px`
 }
