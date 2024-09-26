@@ -87,11 +87,12 @@ const paperReceiptFullLineTopEl = document.getElementById("paperReceiptFullLineT
 const paperReceiptFullLineBottomEl = document.getElementById("paperReceiptFullLineBottom")
 const replaysTextEl = document.getElementById("replaysText")
 // Variables
-let currentMapId, currentMapMd5, foundMapInMappool = false
+let currentMapId, currentMapMd5, foundMapInMappool = false, state
 
 socket.onmessage = event => {
     const data = JSON.parse(event.data)
     console.log(data)
+    console.log(data.menu.state)
 
     if (currentMapId !== data.menu.bm.id || currentMapMd5 !== data.menu.bm.md5 && allBeatmaps) {
         currentMapId = data.menu.bm.id
@@ -148,6 +149,14 @@ socket.onmessage = event => {
         paperReceiptStatsCSEl.innerText = `+ CS ${data.menu.bm.stats.CS}`
         paperReceiptStatsAREl.innerText = `+ AR ${data.menu.bm.stats.AR}`
         paperReceiptStatsLENEl.innerText = `+ ${displayLength(parseInt(data.menu.bm.time.full / 1000))}`
+    }
+
+    // Set replayer name
+    if (state !== data.menu.state) {
+        state = data.menu.state
+
+        if (state === 2) replayerNameEl.innerText = data.gameplay.name.toUpperCase()
+        else if (state === 7) replayerNameEl.innerText = data.resultsScreen.name.toUpperCase()
     }
 }
 
